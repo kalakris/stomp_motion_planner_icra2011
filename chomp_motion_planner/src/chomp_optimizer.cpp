@@ -175,7 +175,7 @@ void ChompOptimizer::optimize()
 {
   collision_space_->lock();
 
-  animatePath();
+  //animatePath();
 
   ros::WallTime start_time = ros::WallTime::now();
   // iterate
