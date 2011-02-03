@@ -1,0 +1,37 @@
+test_parameters:
+  learn_directory_name: dmp_test_learn
+  num_steps: 100
+  num_trials: 100
+  num_rollouts: 8
+  num_rfs: 20
+  num_reused_trials: 4
+  
+  variance: 0.3
+  
+  final_cost_penalty: 100000
+  instant_velocity_cost_penalty: 0
+  waypoint_cost_penalty: 100000
+
+  lwr:
+    rfs_width_boundary: 0.7
+    use_offset: no
+    num_rfs: 20  
+
+  waypoints:
+  - timing: 0.3
+    waypoint: 0.25
+    start: 0.0
+    goal: 1.0
+  
+  dmp:
+
+    package_name: policy_improvement_test
+    library_base_directory_name: library
+    library_directory_name: dmp_test_lib
+    data_directory_name: dmp_test_data
+    debug_directory_name: dmp_test_debug
+
+    execution_duration: 1.0
+    can_sys_cutoff: 0.001
+    k_gain_icra2009: 50.0
+    alpha_z_nips2003: 10.0

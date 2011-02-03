@@ -1,0 +1,24 @@
+<package>
+  <description brief="task_recorder_test">
+
+     task_recorder_test
+
+  </description>
+  <author>Peter Pastor</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/task_recorder_test</url>
+
+  <depend package="roscpp"/>
+
+  <depend package="task_recorder"/>
+
+  <depend package="pr2_msgs"/>
+
+  <depend package="std_msgs"/>
+
+  <depend package="policy_improvement_utilities"/>
+
+</package>
+
+

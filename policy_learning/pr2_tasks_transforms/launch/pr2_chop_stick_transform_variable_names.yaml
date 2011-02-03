@@ -1,0 +1,123 @@
+# -----------------------------------------------------------------------------------
+# variable names used in dmp_trajectory.cpp
+# -----------------------------------------------------------------------------------
+
+trajectory:
+
+  chop_stick_and_joint_right_arm: r_chop_x r_chop_xd r_chop_xdd l_chop_y r_chop_yd r_chop_ydd r_chop_z r_chop_zd r_chop_zdd r_chop_roll r_chop_rolld r_chop_rolldd r_chop_pitch r_chop_pitchd r_chop_pitchdd r_chop_yaw r_chop_yawd r_chop_yawdd r_shoulder_pan r_shoulder_pan_d r_shoulder_pan_dd r_shoulder_lift r_shoulder_lift_d r_shoulder_lift_dd r_upper_arm_roll r_upper_arm_roll_d r_upper_arm_roll_dd r_elbow_flex r_elbow_flex_d r_elbow_flex_dd r_forearm_roll r_forearm_roll_d r_forearm_roll_dd r_wrist_flex r_wrist_flex_d r_wrist_flex_dd r_wrist_roll r_wrist_roll_d r_wrist_roll_dd
+  debug_chop_stick_right_arm: time dt unspecified r_chop_x r_chop_xd r_chop_xdd r_chop_y r_chop_yd r_chop_ydd r_chop_z r_chop_zd r_chop_zdd r_chop_roll r_chop_rolld r_chop_rolldd r_chop_pitch r_chop_pitchd r_chop_pitchdd r_chop_yaw r_chop_yawd r_chop_yawdd
+  chop_stick_right_arm: r_chop_x r_chop_xd r_chop_xdd r_chop_y r_chop_yd r_chop_ydd r_chop_z r_chop_zd r_chop_zdd r_chop_roll r_chop_rolld r_chop_rolldd r_chop_pitch r_chop_pitchd r_chop_pitchdd r_chop_yaw r_chop_yawd r_chop_yawdd
+
+  r_chop_x:
+    name: r_chop_x
+    unit: m
+  r_chop_xd:
+    name: r_chop_xd
+    unit: m/s
+  r_chop_xdd:
+    name: r_chop_xdd
+    unit: m/s^2
+  r_chop_y:
+    name: r_chop_y
+    unit: m
+  r_chop_yd:
+    name: r_chop_yd
+    unit: m/s
+  r_chop_ydd:
+    name: r_chop_ydd
+    unit: m/s^2
+  r_chop_z:
+    name: r_chop_z
+    unit: m
+  r_chop_zd:
+    name: r_chop_zd
+    unit: m/s
+  r_chop_zdd:
+    name: r_chop_zdd
+    unit: m/s^2
+  r_chop_roll:
+    name: r_chop_roll
+    unit: rad
+  r_chop_rolld:
+    name: r_chop_rolld
+    unit: rad/s
+  r_chop_rolldd:
+    name: r_chop_rolldd
+    unit: rad/s^2
+  r_chop_pitch:
+    name: r_chop_pitch
+    unit: rad
+  r_chop_pitchd:
+    name: r_chop_pitchd
+    unit: rad/s
+  r_chop_pitchdd:
+    name: r_chop_pitchdd
+    unit: rad/s^2
+  r_chop_yaw:
+    name: r_chop_yaw
+    unit: rad
+  r_chop_yawd:
+    name: r_chop_yawd
+    unit: rad/s
+  r_chop_yawdd:
+    name: r_chop_yawdd
+    unit: rad/s^2
+
+  chop_stick_and_joint_left_arm: l_chop_x l_chop_xd l_chop_xdd l_chop_y l_chop_yd l_chop_ydd l_chop_z l_chop_zd l_chop_zdd l_chop_roll l_chop_rolld l_chop_rolldd l_chop_pitch l_chop_pitchd l_chop_pitchdd l_chop_yaw l_chop_yawd l_chop_yawdd r_shoulder_pan r_shoulder_pan_d r_shoulder_pan_dd r_shoulder_lift r_shoulder_lift_d r_shoulder_lift_dd r_upper_arm_roll r_upper_arm_roll_d r_upper_arm_roll_dd r_elbow_flex r_elbow_flex_d r_elbow_flex_dd r_forearm_roll r_forearm_roll_d r_forearm_roll_dd r_wrist_flex r_wrist_flex_d r_wrist_flex_dd r_wrist_roll r_wrist_roll_d r_wrist_roll_dd
+  debug_chop_stick_left_arm: time dt unspecified l_chop_x l_chop_xd l_chop_xdd l_chop_y l_chop_yd l_chop_ydd l_chop_z l_chop_zd l_chop_zdd l_chop_roll l_chop_rolld l_chop_rolldd l_chop_pitch l_chop_pitchd l_chop_pitchdd l_chop_yaw l_chop_yawd l_chop_yawdd
+  chop_stick_left_arm: l_chop_x l_chop_xd l_chop_xdd l_chop_y l_chop_yd l_chop_ydd l_chop_z l_chop_zd l_chop_zdd l_chop_roll l_chop_rolld l_chop_rolldd l_chop_pitch l_chop_pitchd l_chop_pitchdd l_chop_yaw l_chop_yawd l_chop_yawdd
+
+  l_chop_x:
+    name: l_chop_x
+    unit: m
+  l_chop_xd:
+    name: l_chop_xd
+    unit: m/s
+  l_chop_xdd:
+    name: l_chop_xdd
+    unit: m/s^2
+  l_chop_y:
+    name: l_chop_y
+    unit: m
+  l_chop_yd:
+    name: l_chop_yd
+    unit: m/s
+  l_chop_ydd:
+    name: l_chop_ydd
+    unit: m/s^2
+  l_chop_z:
+    name: l_chop_z
+    unit: m
+  l_chop_zd:
+    name: l_chop_zd
+    unit: m/s
+  l_chop_zdd:
+    name: l_chop_zdd
+    unit: m/s^2
+  l_chop_roll:
+    name: l_chop_roll
+    unit: rad
+  l_chop_rolld:
+    name: l_chop_rolld
+    unit: rad/s
+  l_chop_rolldd:
+    name: l_chop_rolldd
+    unit: rad/s^2
+  l_chop_pitch:
+    name: l_chop_pitch
+    unit: rad
+  l_chop_pitchd:
+    name: l_chop_pitchd
+    unit: rad/s
+  l_chop_pitchdd:
+    name: l_chop_pitchdd
+    unit: rad/s^2
+  l_chop_yaw:
+    name: l_chop_yaw
+    unit: rad
+  l_chop_yawd:
+    name: l_chop_yawd
+    unit: rad/s
+  l_chop_yawdd:
+    name: l_chop_yawdd
+    unit: rad/s^2    

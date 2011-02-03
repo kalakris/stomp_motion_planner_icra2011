@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+		echo '';
+		echo 'usage: plotNullspaceTerm {joint id (1, 2, 3, ..., 6)}';
+		echo '';
+else
+
+		params='';
+
+		for i in $@
+		do
+		params=$params" /r_arm_cartesian_twist_controller_ik_with_nullspace_optimization/nullspace_term/array[0]/nullspace_term_$i";
+		done
+				
+		rxplot $params
+
+fi

@@ -1,0 +1,22 @@
+<launch>
+
+  <rosparam ns="/dmp_motion_generation_test" file="$(find dmp_motion_controller_test)/launch/dmp_test_params.yaml" command="load" />
+
+  <rosparam ns="/dmp_motion_learner" file="$(find dmp_motion_controller_test)/launch/dmp_motion_controller_test_directory_params.yaml" command="load" />
+  <rosparam ns="/dmp_motion_learner" file="$(find dmp_motion_controller_test)/launch/dmp_test_params.yaml" command="load"/>
+  <rosparam ns="/dmp_motion_learner" file="$(find dmp_motion_controller_test)/launch/lwr_test_params.yaml" command="load"/>
+  
+  <rosparam ns="/r_arm_dmp_ik_controller" file="$(find dmp_motion_controller_test)/launch/dmp_test_params.yaml" command="load"/>
+  <rosparam ns="/l_arm_dmp_ik_controller" file="$(find dmp_motion_controller_test)/launch/dmp_test_params.yaml" command="load"/>
+  
+  <rosparam ns="/dmp_motion_controller_test" file="$(find dmp_motion_generation)/config/variable_names.yaml" command="load"/>
+  
+  <node name="dmp_motion_controller_test" pkg="dmp_motion_controller_test" type="dmp_controller_regression_test" output="screen">
+
+    <rosparam command="load" file="$(find dmp_motion_controller_test)/launch/dmp_motion_controller_test.yaml"/>
+    <rosparam command="load" file="$(find dmp_motion_controller_test)/launch/dmp_test_params.yaml" />
+    <rosparam command="load" file="$(find dmp_motion_controller_test)/launch/dmp_test_variable_names.yaml" />
+
+  </node>
+
+</launch>

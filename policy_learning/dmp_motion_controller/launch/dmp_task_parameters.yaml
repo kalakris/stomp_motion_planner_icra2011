@@ -1,0 +1,75 @@
+movement_names: grasp poure place release
+
+gripper_offsets:
+  grasp:
+    offset_x: -0.035
+    offset_y: 0.0
+    offset_z: 0.0
+  poure:
+    offset_x: -0.04
+    offset_y: 0.0
+    offset_z: 0.07
+  place:
+    offset_x: -0.04
+    offset_y: 0.0
+    offset_z: -0.07
+  release:
+    offset_x: -0.04
+    offset_y: 0.0
+    offset_z: 0.0
+
+goal_offsets:
+  grasp:
+    offset_x: 0.0
+    offset_y: 0.0
+    offset_z: 0.0
+  poure:
+    offset_x: 0.02
+    offset_y: -0.04
+    offset_z: 0.215
+  place:
+    offset_x: -0.03
+    offset_y: -0.02
+    offset_z: 0.02
+  release:
+    offset_x: -0.05
+    offset_y: 0.0
+    offset_z: 0.0
+
+gripper_control:
+  open_effort: 100.0
+  close_effort: -15.0
+  grasp:
+    open: 0.01
+    close: 0.74
+  poure:
+    open: 666.0
+    close: 0.0
+  place:
+    open: 666.0
+    close: 0.0
+  release:
+    open: 0.01
+    close: 0.6
+
+rotation_reference_points:
+  grasp:
+    x: 0.0
+    y: -0.2
+    z: 0.1
+  poure:
+    x: 0.0
+    y: -0.3
+    z: 0.1
+  place:
+    x: 0.0
+    y: -0.2
+    z: 0.1
+  release:
+    x: 0.0
+    y: -0.2
+    z: 0.1
+    
+start_grasp_orientation_adaptation: 0.6
+end_grasp_orientation_adaptation: 0.9
+movement_adaptation_threshold: 0.65

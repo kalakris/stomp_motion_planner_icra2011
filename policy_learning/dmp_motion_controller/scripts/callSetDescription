@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -z $1 ] || [ -z $2 ] || [ -z $3 ]; then
+		echo '';
+		echo 'usage: callSetDescription <dmp_id> <description> <type>';
+		echo '';
+		echo 'return: whether service call was successful.';
+		echo '';
+else
+		description="$@";
+		rosservice call /set_description $1 $2 $3
+fi

@@ -1,0 +1,20 @@
+<launch>
+
+  <!-- Location of the cmvision color file -->
+  <param name="cmvision/color_file" type="string" value="$(find dmp_motion_learner)/colors_5_obj_noon.txt" />
+
+  <!-- Turn debug output on or off -->
+  <param name="cmvision/debug_on" type="bool" value="false"/>
+
+  <!-- Enable Mean shift filtering -->
+  <param name="cmvision/mean_shift_on" type="bool" value="true"/>
+
+  <!-- Spatial bandwidth: Bigger = smoother image -->
+  <param name="cmvision/spatial_radius_pix" type="double" value="1.0"/>
+
+  <!-- Color bandwidth: Bigger = smoother image-->
+  <param name="cmvision/color_radius_pix" type="double" value="20.0"/>
+
+  <node name="cmvision" pkg="cmvision" type="cmvision" output="screen" args="image:=/wide_stereo_offset/left/image_rect_color"/>
+
+</launch>

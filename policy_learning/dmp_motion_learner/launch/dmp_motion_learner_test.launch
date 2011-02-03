@@ -1,0 +1,17 @@
+<launch>
+
+  <rosparam ns="/dmp_motion_learner" command="load" file="$(find dmp_motion_controller)/config/pr2_cartesian_space_variable_names.yaml" />
+  <rosparam ns="/dmp_motion_learner" command="load" file="$(find dmp_motion_controller)/config/pr2_joint_space_variable_names.yaml" />
+
+  <rosparam ns="/dmp_motion_learner" command="load" file="$(find dmp_motion_generation)/config/dmp_params.yaml" />
+  <rosparam ns="/dmp_motion_learner" command="load" file="$(find dmp_motion_generation)/config/lwr_params.yaml" />
+  <rosparam ns="/dmp_motion_learner" command="load" file="$(find dmp_motion_generation)/config/variable_names.yaml" />	
+
+  <rosparam ns="/dmp_motion_learner" command="load" file="$(find dmp_motion_learner)/launch/directory_params.yaml" />
+  <rosparam ns="/dmp_motion_learner" command="load" file="$(find dmp_motion_learner)/launch/dmp_motion_learner_test.yaml" />	  
+
+	<node name="dmp_motion_learner_test" pkg="dmp_motion_learner" type="dmp_learner_regression_test" output="screen">
+	
+	</node>
+
+</launch>

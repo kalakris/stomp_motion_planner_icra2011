@@ -1,0 +1,18 @@
+<package>
+  <description brief="dmp_motion_gui">
+
+     dmp_motion_gui
+
+  </description>
+  <author>Tim Field</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/dmp_motion_gui</url>
+  <depend package="rospy"/>
+  <depend package="roslib"/>
+  <depend package="rosparam"/>
+  <depend package="dmp_motion_controller"/>
+  <depend package="dmp_motion_learner"/>
+
+</package>
+

@@ -1,0 +1,41 @@
+#!/bin/bash
+
+if [ -z $1 ] || [ -z $2 ]; then
+		echo '';
+		echo 'usage: callSetupDMPForReproduction {cartesian, joint, both} <dmp_id>';
+		echo '';
+		echo 'return: whether the service call was successful.';
+		echo '';
+else
+		type=
+		if [ $1 = "joint" ] || [ $1 = "j" ]; then
+				type="dmp_joint_position_controller";
+		elif [ "$1" = "cartesian" ] || [ $1 = "c" ]; then
+				type="dmp_cartesian_position_controller";
+		elif [ "$1" = "both" ] || [ $1 = "b" ]; then
+				type="r_arm_dmp_ik_controller";
+		else				
+				echo 'error: first parameter needs to be either joint or cartesian, but is' $1;
+				exit -1;
+		fi
+		
+		list=$2;
+		first=0;
+		for i in $@
+		do
+				if [ $first -eq 2 ]; then
+						list=$list', '$i;
+				elif [ $first -eq 0 ]; then
+						first=1;
+				elif [ $first -eq 1 ]; then
+						first=2;
+				fi
+		done
+
+		if [ $# -eq 2 ]; then
+				rosservice call /$type/setup_dmp_for_reproduction [$list];
+		else
+			  rosservice call /$type/setup_dmp_for_reproduction "[$list]";
+		fi
+
+fi

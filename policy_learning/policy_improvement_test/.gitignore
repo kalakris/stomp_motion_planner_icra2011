@@ -1,0 +1,11 @@
+msg_gen
+.cproject
+.project
+bin/
+build/
+ROS_NOBUILD
+policy_improvement_test.bag
+library/dmp_test_debug/
+library/dmp_test_learn/
+cmake_install.cmake
+debug/

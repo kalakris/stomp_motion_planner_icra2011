@@ -1,0 +1,5 @@
+dual_arm_dmp_joint_position_controller:
+  type: dmp_motion_controller/DMPDualArmJointPositionController
+  left_arm_controller: l_arm_dmp_joint_position_controller
+  right_arm_controller: r_arm_dmp_joint_position_controller
+  

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+plot_r_arm_joint_state "ik" "shoulder_pan" &
+plot_r_arm_joint_state "ik" "shoulder_lift" &
+plot_r_arm_joint_state "ik" "upper_arm_roll" &
+plot_r_arm_joint_state "ik" "elbow_flex" &
+plot_r_arm_joint_state "ik" "forearm_roll" &
+plot_r_arm_joint_state "ik" "wrist_flex" &
+plot_r_arm_joint_state "ik" "wrist_roll" &

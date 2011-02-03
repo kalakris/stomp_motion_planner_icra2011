@@ -1,0 +1,10 @@
+string[] joint_names
+string bag_file_name
+string data_directory_name
+int32 dmp_id
+---
+dmp_motion_generation/DynamicMovementPrimitive dmp
+string info
+int32 return_code
+int32 SERVICE_CALL_FAILED = 0
+int32 SERVICE_CALL_SUCCESSFUL = 1

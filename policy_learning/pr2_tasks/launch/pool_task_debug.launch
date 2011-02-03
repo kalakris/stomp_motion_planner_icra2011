@@ -1,0 +1,12 @@
+<launch>
+
+  <rosparam ns="/dmp_motion_learner" file="$(find pr2_tasks)/launch/pool_task_directory_params.yaml" command="load"/>
+
+  <rosparam ns="/dmp_motion_learner" file="$(find pr2_tasks)/launch/dmp_params.yaml" command="load"/>
+  <rosparam ns="/dmp_motion_learner" file="$(find pr2_tasks)/launch/lwr_params.yaml" command="load"/>
+  
+  <node launch-prefix="xterm -e gdb --args" name="policy_improvement_loop_main" pkg="policy_improvement_loop" type="policy_improvement_loop_main" output="screen">
+	  <rosparam command="load" file="$(find pr2_tasks)/launch/pool_task.yaml"/>
+  </node>
+
+</launch>

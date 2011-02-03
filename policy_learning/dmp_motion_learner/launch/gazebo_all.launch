@@ -1,0 +1,19 @@
+<launch>
+  <!-- start up empty world -->
+  <include file="$(find gazebo)/launch/empty_world.launch"/>
+
+  <!-- start pr2 robot -->
+  <include file="$(find pr2_gazebo)/pr2.launch"/>
+
+  <!-- table -->
+  <param name="desk3" textfile="$(find gazebo_worlds)/objects/desk3.model" />
+  <node name="spawn_desk3" pkg="gazebo_tools" type="gazebo_model" args="-p desk3 -x 1.0 spawn desk3" respawn="false" output="screen" />
+
+  <param name="red_can" textfile="$(find gazebo_worlds)/objects/red_can.model" />
+  <node name="red_can" pkg="gazebo_tools" type="gazebo_model" args="-p red_can -x 1.0 -y 0.05 -z 1.0 spawn red_can_model" respawn="false" output="screen" />
+
+  <param name="blue_can" textfile="$(find gazebo_worlds)/objects/blue_can.model" />
+  <node name="blue_can" pkg="gazebo_tools" type="gazebo_model" args="-p blue_can -x 1.0 -y 0.25 -z 1.0 spawn blue_can_model" respawn="false" output="screen" />
+
+</launch>
+

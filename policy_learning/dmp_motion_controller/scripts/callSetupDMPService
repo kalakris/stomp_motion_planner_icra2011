@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ -z $1 ] || [ -z $2 ] || [ -z $3 ] || [ -z $4 ] || [ -z $5 ] ; then
+		echo '';
+		echo 'usage: callSetupDMP {cartesian, joint} <dmp_id> <additional x> <additional y> <additional z>';
+		echo '';
+		echo 'return: whether the service call was successful.';
+		echo '';
+else
+		type=
+		if [ $1 = "joint" ]; then
+				echo 'joint is not implemented yet...';
+				exit 1;
+		elif [ "$1" = "cartesian" ]; then
+				type="dmp_cartesian_position_controller";
+		else				
+				echo 'error: first parameter needs to be either joint or cartesian, but is' $1;
+				exit -1;
+		fi
+
+		# new_goal="[$3, $4, $5]";
+		dmp_id=$2;
+		# cmd='rosservice call /'$type'/setup_dmp '$dmp_id' '\"$new_goal\";
+		# cmd='rosservice call /'$type'/setup_dmp '$dmp_id' '\"'['$3', '$4', '$5']'\";
+		# echo $cmd;
+		# $cmd;
+
+		rosservice call /$type/setup_dmp $dmp_id
+
+fi

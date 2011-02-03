@@ -1,0 +1,48 @@
+<package>
+  <description brief="dmp_motion_controller">
+
+     dmp_motion_controller
+
+  </description>
+  <author>Peter Pastor</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/dmp_motion_controller</url>
+
+  <depend package="roscpp"/>
+  
+  <depend package="dmp_motion_generation" />
+  
+  <depend package="pr2_tasks_transforms" />
+
+  <depend package="control_toolbox" />  
+
+  <depend package="rosrt"/>  
+
+  <depend package="pr2_controller_interface" />
+  <depend package="pr2_controllers_msgs"/>
+  <depend package="pr2_mechanism_model" />
+  
+  <depend package="std_msgs"/>
+  <depend package="geometry_msgs" />
+  <depend package="diagnostic_msgs" />
+  <depend package="trajectory_msgs" />
+  <depend package="visualization_msgs" />
+
+  <depend package="tf" />
+  <depend package="tf_conversions" />    
+
+  <depend package="angles" />
+  <depend package="eigen" />
+  <depend package="filters" />
+
+  <depend package="policy_improvement_utilities" />
+
+<!--  <depend package="teleop_controllers" /> -->
+  
+  <export>
+    <pr2_controller_interface plugin="${prefix}/controller_plugins.xml" />
+    <cpp cflags="-I${prefix}/include -I${prefix}/srv/cpp -I${prefix}/msg/cpp" lflags="-Wl,-rpath,${prefix}/lib/ -L${prefix}/lib -ldmp_motion_controller" />
+  </export>
+
+</package>

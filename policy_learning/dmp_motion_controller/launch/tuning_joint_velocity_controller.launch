@@ -1,0 +1,7 @@
+<launch>
+
+  <rosparam command="load" file="$(find dmp_motion_controller)/config/joint_velocity_controller_parameter.yaml" />
+	
+  <node pkg="pr2_controller_manager" type="spawner" name="tuner" args="r_arm_velocity_controller_tuner" />
+
+</launch>

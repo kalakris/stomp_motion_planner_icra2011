@@ -1,0 +1,11 @@
+build
+bin
+lib
+ROS_NOBUILD
+.project
+.cproject
+cmake_install*
+library/dmp_test_debug
+library/dmp_test_lib
+*.swp
+

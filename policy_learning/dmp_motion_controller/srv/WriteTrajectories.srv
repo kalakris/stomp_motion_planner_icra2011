@@ -1,0 +1,8 @@
+string filename
+---
+string info
+int32 return_code
+int32 SERVICE_CALL_FAILED = 0
+int32 SERVICE_CALL_SUCCESSFUL = 1
+int32 EXECUTING_DMP = 2
+int32 DMP_QUEUE_EMPTY = 4

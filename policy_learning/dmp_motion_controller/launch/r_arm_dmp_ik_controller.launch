@@ -1,0 +1,18 @@
+<launch>
+
+  <rosparam file="$(find dmp_motion_controller)/launch/dmp_ik_controller.yaml" command="load"/>
+
+  <rosparam ns="/dmp_motion_generation" file="$(find dmp_motion_generation)/config/dmp_params.yaml" command="load" />
+  <rosparam ns="/dmp_motion_generation" file="$(find dmp_motion_generation)/config/variable_names.yaml" command="load" />
+
+  <rosparam ns="/r_arm_dmp_ik_controller" file="$(find dmp_motion_controller)/launch/r_arm_joint_position_gains.yaml" command="load"/>
+  <rosparam ns="/r_arm_dmp_ik_controller" file="$(find dmp_motion_generation)/config/variable_names.yaml" command="load"/>
+  <rosparam ns="/r_arm_dmp_ik_controller" file="$(find dmp_motion_controller)/config/pr2_right_arm_variable_names.yaml" command="load"/>
+
+  <rosparam ns="/pr2_tasks_transform" file="$(find pr2_tasks_transforms)/launch/task_transform.yaml" command="load"/>
+    
+  <rosparam ns="/dmp_motion_learner" file="$(find pr2_tasks_transforms)/launch/pr2_pool_transform_right_arm_variable_names.yaml" command="load"/>
+
+  <!-- <rosparam ns="/r_arm_dmp_ik_controller" file="$(find dmp_motion_controller_test)/launch/dmp_test_params.yaml" command="load"/> -->
+
+</launch>

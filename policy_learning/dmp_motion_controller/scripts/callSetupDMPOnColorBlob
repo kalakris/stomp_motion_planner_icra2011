@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -z $1 ] || [ -z $2 ] || [ -z $3 ]; then
+		echo '';
+		echo 'usage: callSetupDMPOnColorBlob {cartesian, both} <dmp_id> <color>';
+		echo '';
+		echo 'return: whether the service call was successful.';
+		echo '';
+else
+		type=
+		if [ "$1" = "cartesian" ] || [ $1 = "c" ]; then
+				type="dmp_cartesian_position_controller";
+		elif [ "$1" = "both" ] || [ $1 = "b" ]; then
+				type="r_arm_dmp_ik_controller";
+		else
+				echo 'error: first parameter needs to be either joint or cartesian, but is' $1;
+				exit -1;
+		fi
+		
+		rosservice call /$type/setup_dmp_on_color_blob [$2] ["$3"];
+
+fi

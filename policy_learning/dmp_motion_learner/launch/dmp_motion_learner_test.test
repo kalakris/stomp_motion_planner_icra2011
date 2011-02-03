@@ -1,0 +1,11 @@
+<launch>
+
+	<test test-name="dmp_motion_learner_test" pkg="dmp_motion_learner_test" type="dmp_learner_regression_test">
+		
+      <rosparam command="load" file="$(find dmp_motion_generation)/config/dmp_params.yaml" />
+	  <rosparam command="load" file="$(find dmp_motion_generation)/config/lwr_params.yaml" />
+	  <rosparam command="load" file="$(find dmp_motion_generation)/config/variable_names.yaml" />	
+	
+	</test>
+
+</launch>

@@ -1,0 +1,34 @@
+<package>
+  <description brief="pr2_tasks_transforms">
+
+     pr2_tasks_transforms
+
+  </description>
+  <author>Peter Pastor</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pr2_tasks_transforms</url>
+  
+  <depend package="roscpp"/>
+  <depend package="eigen"/>
+  <depend package="kdl"/>
+
+  <depend package="rosrt"/>
+  <depend package="visualization_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+
+  <depend package="dmp_motion_generation"/>
+
+  <depend package="pr2_mechanism_model"/>
+  <depend package="angles" />
+  
+  <depend package="policy_improvement_utilities"/>
+
+  <export>
+    <cpp cflags="-I${prefix}/include" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -lpr2_tasks_transforms"/>
+  </export>
+
+</package>
+
+

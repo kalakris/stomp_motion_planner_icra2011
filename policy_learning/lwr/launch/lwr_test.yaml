@@ -1,0 +1,22 @@
+test_parameters:
+  
+  package_name: lwr
+
+  data_directory_name: data
+  library_directory_name: library
+  
+  rfs_width_boundary: 0.5
+  use_offset: 0
+  num_rfs: 100
+  
+  can_sys_cutoff: 0.001
+  
+  num_data_learn: 1000
+  num_data_query: 2000
+  
+#  mse_prediction_error_threshold: 2.3
+#  mse_rescaling_error_threshold: 0.0001
+
+  mse_prediction_error_threshold: 200.3
+  mse_rescaling_error_threshold: 0.0001
+  

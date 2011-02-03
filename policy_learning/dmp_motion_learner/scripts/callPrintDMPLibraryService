@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+		echo '';
+		echo 'usage: callPrintDMPLibraryService {quiet, normal, verbose}';
+		echo '';
+		echo 'return: prints the content of the motion library.';
+		echo '';
+else
+	if [ "$1" = "quiet" ] || [ $1 = "q" ]; then
+		rosservice call /print_dmp_library "quiet"	
+	elif [ "$1" = "normal" ] || [ "$1" = "n" ]; then
+		rosservice call /print_dmp_library "normal"		
+	elif [ "$1" = "verbose" ] || [ "$1" = "v" ]; then
+		rosservice call /print_dmp_library "verbose"		
+	else
+		rosservice call /print_dmp_library "quiet"		
+	fi
+fi

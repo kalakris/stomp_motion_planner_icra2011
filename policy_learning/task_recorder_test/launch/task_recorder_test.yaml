@@ -1,0 +1,6 @@
+package_name: task_recorder_test
+
+data_bag_file_name: test_data/accumulator_test.bag
+
+num_samples: 100
+num_iterations: 1

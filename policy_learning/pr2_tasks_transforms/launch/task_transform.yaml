@@ -1,0 +1,10 @@
+publishing_rate: 50
+
+# pool task
+right_gripper_to_cue_offset: [-0.038, 0.0, 0.0]
+left_gripper_to_bridge_offset: [0.0, 0.0, 0.035]
+cue_offset: [0.0, 0.0, 1.39]
+
+# chop stick task
+gripper_to_chop_stick_offset: [0.0, 0.0, 0.0]
+chop_stick_offset: [0.0, 0.0, 0.2]

@@ -1,0 +1,51 @@
+task_name: pr2_tasks/PoolTask
+left_arm_dmp_controller_name: l_arm_dmp_ik_controller
+right_arm_dmp_controller_name: r_arm_dmp_ik_controller
+dual_arm_dmp_controller_name: dual_arm_dmp_ik_controller
+
+num_time_steps: 100
+num_dimensions: 7
+
+first_trial: 1
+last_trial: 100
+
+initialize_dmp_from_file: no
+# initial_dmp_file_name: /u/pastor/ros/pr2_tasks/library/initial_dmps/initial_dmp.bag
+initial_dmp_file_name: /u/pastor/ros/pr2_tasks/library/initial_dmps/initial_dmp.bag
+initial_spp_file_name: /u/pastor/ros/pr2_tasks/library/initial_dmps/initial_spp.bag
+
+left_arm_task_dmp_id: 1
+right_arm_task_dmp_id: 2
+dual_arm_reset_dmp_id: 3
+
+right_arm_movement_duration: 1.0
+left_arm_movement_duration: 2.0
+execution_duration: 3.1
+reset_movement_duration: 3.0
+right_arm_joint_reset_movement_duration: 0.7
+
+dmp_sampling_frequency: 1000.0
+root_frame: torso_lift_link
+right_arm_tip_frame: r_gripper_tool_frame
+
+demonstration_bag_file: library/dmp_test_data/pool_r_arm_final_05.bag
+left_arm_demonstration_file_name: library/dmp_test_data/pool_l_arm_final_09.bag
+
+control_cost_weight: 0.0
+# effort_cost_weight: 0.001
+effort_cost_weight: 0.0
+# l_gripper_acceleration_weight: 1.0
+l_gripper_acceleration_weight: 0.0
+# ball_travel_distance_weight: 0.001
+ball_travel_distance_weight: 130.0
+ball_offset_weight: 200000.0
+
+max_backward_distance: -0.07
+
+effort_cost_joint_names: r_shoulder_pan_joint r_shoulder_lift_joint r_upper_arm_roll_joint r_elbow_flex_joint r_forearm_roll_joint r_wrist_flex_joint r_wrist_roll_joint
+
+num_rollouts: 8
+num_reused_rollouts: 4
+#              offset  roll  pitch yaw     right arm joint angles                   spp x  spp yaw
+noise_stddev: [0.1,    0.02, 0.02, 0.02,   0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0,       0.00,   0.0]
+noise_decay:  [0.99,   0.99, 0.99, 0.99,   0.99,0.99,0.99,0.99,0.99,0.99,0.99,      0.99,   0.99]

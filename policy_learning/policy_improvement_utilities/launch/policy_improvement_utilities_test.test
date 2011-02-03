@@ -1,0 +1,7 @@
+<launch>
+
+	<test test-name="policy_improvement_utilities_test" pkg="policy_improvement_utilities" type="policy_improvement_utilities_test">
+		<rosparam command="load" file="$(find policy_improvement_utilities)/launch/policy_improvement_utilities_test.yaml"/>
+	</test>
+
+</launch>

@@ -1,0 +1,6 @@
+<launch>
+
+  <include file="$(find dmp_motion_controller)/launch/dmp_joint_position_controller_loader.launch" />
+  <include file="$(find dmp_motion_controller)/launch/dmp_ik_controller_loader.launch" />
+
+</launch>

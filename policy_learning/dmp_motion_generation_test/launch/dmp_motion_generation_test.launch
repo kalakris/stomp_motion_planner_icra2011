@@ -1,0 +1,13 @@
+<launch> 
+
+	<node pkg="dmp_motion_generation_test" name="dmp_motion_generation_test" type="dmp_regression_test" output="screen">
+		
+    <rosparam file="$(find dmp_motion_generation_test)/launch/dmp_motion_generation_test.yaml" command="load" />
+
+    <rosparam file="$(find dmp_motion_generation_test)/launch/dmp_test_params.yaml" command="load" />
+    <rosparam file="$(find dmp_motion_generation_test)/launch/lwr_test_params.yaml" command="load" />
+	  <rosparam file="$(find dmp_motion_generation_test)/launch/dmp_test_variable_names.yaml" command="load" />
+
+	</node>
+
+</launch>

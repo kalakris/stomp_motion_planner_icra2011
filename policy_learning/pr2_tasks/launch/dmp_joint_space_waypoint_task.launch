@@ -1,0 +1,17 @@
+<launch>
+
+  <rosparam ns="/policy_improvement_loop_main" file="$(find dmp_motion_generation)/config/variable_names.yaml" command="load"/>
+  
+  <rosparam ns="/dmp_motion_learner" file="$(find pr2_tasks)/launch/pool_task_directory_params.yaml" command="load"/>
+
+  <rosparam ns="/dmp_motion_learner" file="$(find pr2_tasks)/launch/dmp_params.yaml" command="load"/>
+  <rosparam ns="/dmp_motion_learner" file="$(find pr2_tasks)/launch/lwr_params.yaml" command="load"/>
+  
+  <rosparam ns="/r_arm_joint_position_controller" file="$(find pr2_tasks)/launch/dmp_params.yaml" command="load"/>
+  <rosparam ns="/l_arm_joint_position_controller" file="$(find pr2_tasks)/launch/dmp_params.yaml" command="load"/>
+
+	<node name="policy_improvement_loop_main" pkg="policy_improvement_loop" type="policy_improvement_loop_main" output="screen">
+		<rosparam command="load" file="$(find pr2_tasks)/launch/dmp_joint_space_waypoint_task.yaml"/>
+	</node>
+
+</launch>

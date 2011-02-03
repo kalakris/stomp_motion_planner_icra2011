@@ -1,0 +1,7 @@
+<launch> 
+    <node pkg="policy_improvement_test" name="policy_improvement_test" type="policy_improvement_test" output="screen">
+        <rosparam command="load" file="$(find policy_improvement_test)/launch/policy_improvement_test.yaml"/>
+   <!--     <rosparam command="load" file="$(find policy_improvement_test)/launch/dmp_test_params.yaml" /> -->
+   <!--     <rosparam command="load" file="$(find policy_improvement_test)/launch/dmp_test_variable_names.yaml" /> -->
+    </node>
+</launch>

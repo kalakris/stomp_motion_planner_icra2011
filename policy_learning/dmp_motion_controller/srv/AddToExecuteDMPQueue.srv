@@ -1,0 +1,14 @@
+dmp_motion_generation/DynamicMovementPrimitive[] dmps
+float64[] execution_durations
+int32[] types
+int32 LEFT_ARM_NO_TRANSFORM = 0
+int32 RIGHT_ARM_NO_TRANSFORM = 1
+int32 LEFT_ARM_POOL_TRANSFORM = 2
+int32 RIGHT_ARM_POOL_TRANSFORM = 3
+int32 LEFT_ARM_CHOP_STICK_TRANSFORM = 4
+int32 RIGHT_ARM_CHOP_STICK_TRANSFORM = 5
+---
+string info
+int32 return_code
+int32 SERVICE_CALL_FAILED = 0
+int32 SERVICE_CALL_SUCCESSFUL = 1

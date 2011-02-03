@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+		echo '';
+		echo 'usage: recordJointStates <filename>';
+		echo '';
+		echo 'press Ctrl-C to stop recording !';
+		echo 'the file containing the data will be named filename.bag and need to be located in the <data_directory> for callLearnJointSpaceDMPService.';
+		echo '';
+else
+		rosrecord /joint_states -F $1
+fi

@@ -1,0 +1,2 @@
+l_arm_dmp_joint_position_controller:
+  type: dmp_motion_controller/DMPJointPositionController

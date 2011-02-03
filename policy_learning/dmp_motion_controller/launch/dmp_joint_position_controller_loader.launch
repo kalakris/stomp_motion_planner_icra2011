@@ -1,0 +1,12 @@
+<launch>
+
+  <include file="$(find dmp_motion_controller)/launch/r_arm_dmp_joint_position_controller.launch" />
+  <include file="$(find dmp_motion_controller)/launch/l_arm_dmp_joint_position_controller.launch" />
+  <include file="$(find dmp_motion_controller)/launch/dual_arm_dmp_joint_position_controller.launch" />
+
+  <node name="dmp_joint_position_controllers_spawner"
+        pkg="pr2_controller_manager" type="spawner" output="screen"
+        args="--stopped r_arm_dmp_joint_position_controller l_arm_dmp_joint_position_controller dual_arm_dmp_joint_position_controller">
+  </node>
+
+</launch>

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+		echo '';
+		echo 'usage: plotAngularVelocities {endeffector coordinate (x, y, and/or z)}';
+		echo '';
+else
+		params='';
+		for i in $@
+		do
+				params=$params" /r_arm_cartesian_twist_controller_ik_with_nullspace_optimization/pose_twist_desired/array[0]/twist/angular/$i,r_arm_cartesian_twist_controller_ik_with_nullspace_optimization/pose_twist_actual/array[0]/twist/angular/$i";
+				echo $params
+		done
+
+		rxplot $params
+fi

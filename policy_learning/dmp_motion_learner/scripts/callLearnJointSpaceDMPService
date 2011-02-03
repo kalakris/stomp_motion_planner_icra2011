@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+		echo '';
+		echo 'usage: callLearnJointSpaceDMPService <filename.bag>';
+		echo '(the bag file need to be located inside the data trajectory)';
+		echo '';
+		echo 'return: the DMP id of the learned motion and whether the service call was successful.';
+		echo '';
+else
+		rosservice call /learn_joint_space_dmp_from_bag_file "['r_shoulder_pan', 'r_shoulder_lift', 'r_upper_arm_roll', 'r_elbow_flex', 'r_forearm_roll', 'r_wrist_flex', 'r_wrist_roll']" $1
+fi

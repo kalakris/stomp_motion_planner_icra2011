@@ -1,0 +1,30 @@
+<package>
+  <description brief="pr2_tasks">
+
+     pr2_tasks
+
+  </description>
+  <author>Peter Pastor</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pr2_tasks</url>
+  <depend package="task_manager"/>
+  <depend package="dmp_motion_controller"/>
+  <depend package="dmp_motion_learner"/>
+  <depend package="dmp_motion_generation"/>
+  <depend package="policy_library"/>
+  <depend package="policy_improvement" />
+  <depend package="policy_improvement_utilities" />
+  <depend package="actionlib" />
+  <depend package="task_recorder" />
+  <depend package="pr2_tasks_transforms"/>
+  <depend package="angles"/>
+
+  <export>
+    <task_manager plugin="${prefix}/task_plugins.xml" />
+  </export>
+
+
+</package>
+
+

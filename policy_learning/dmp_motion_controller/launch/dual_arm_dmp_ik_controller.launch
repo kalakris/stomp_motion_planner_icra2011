@@ -1,0 +1,5 @@
+<launch>
+
+  <rosparam file="$(find dmp_motion_controller)/launch/dmp_dual_arm_ik_controller.yaml" command="load"/>
+
+</launch>

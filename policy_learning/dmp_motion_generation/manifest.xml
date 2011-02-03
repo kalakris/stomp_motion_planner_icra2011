@@ -1,0 +1,29 @@
+<package>
+  <description brief="dmp_motion_generation">
+
+    This package contains an implementation of the Dynamic Movement
+    Primitive (DMP) framework, originally developped by Auke Ijspeert
+    and Stefan Schaal, and modified by Heiko Hoffmann and Peter Pastor.
+
+  </description>
+  <author>Peter Pastor</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/dmp_motion_generation</url>
+  
+  <depend package="std_msgs"/>
+  <depend package="roscpp"/>
+  <depend package="lwr"/>
+  <depend package="bspline"/>
+  <depend package="rosbag" />
+  <depend package="eigen" />
+
+  <depend package="policy_improvement_utilities" />
+
+  <export>
+    <cpp cflags="-I${prefix}/include -I${prefix}/srv/cpp -I${prefix}/msg/cpp" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -ldmp"/>
+  </export>
+
+</package>
+
+

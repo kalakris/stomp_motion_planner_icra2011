@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rosrun cmvision colorgui image:=/wide_stereo_offset/left/image_rect_color

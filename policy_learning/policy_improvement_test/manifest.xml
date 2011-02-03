@@ -1,0 +1,21 @@
+<package>
+  <description brief="policy_improvement_test">
+
+     policy_improvement_test
+
+  </description>
+  <author>Peter Pastor</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/policy_improvement_test</url>
+
+  <depend package="roscpp"/>
+  <depend package="eigen"/>
+
+  <depend package="rosbag"/>
+  <depend package="policy_improvement"/>
+  <depend package="policy_library"/>
+
+</package>
+
+
