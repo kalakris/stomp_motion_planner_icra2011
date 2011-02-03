@@ -2,3 +2,10 @@
 .cproject
 .svn
 .metadata
+bin
+build
+cmake_install.cmake
+lib
+lisp
+msg_gen
+srv_gen
