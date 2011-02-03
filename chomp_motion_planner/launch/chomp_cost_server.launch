@@ -1,0 +1,10 @@
+<launch> 
+	<rosparam ns="/robot_description_planning" command="load" file="$(find pr2_arm_navigation)/planning/planning.yaml" />
+	<node pkg="chomp_motion_planner" name="chomp_cost_server" type="chomp_cost_server" args="collision_map:=collision_map_occ" respawn="true" output="screen">
+		
+                <rosparam command="load" file="$(find chomp_motion_planner)/config/chomp_pr2_right_arm.yaml" />
+
+		<param name="reference_frame" value="base_link"/>
+		
+	</node>
+</launch>

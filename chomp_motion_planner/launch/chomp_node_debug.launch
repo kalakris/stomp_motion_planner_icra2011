@@ -1,0 +1,26 @@
+
+<launch> 
+ <include file="$(find pr2_machine)/$(env ROBOT).machine" />
+
+	<rosparam ns="/robot_description_planning" command="load" file="$(find 3dnav_pr2)/params/planning/planning.yaml" />
+	<node machine="two" launch-prefix="xterm -e gdb --args" pkg="chomp_motion_planner" name="chomp_motion_planner" type="chomp_planner_node" args="collision_map:=collision_map_occ" respawn="true" output="screen" clear_params="true">
+                <rosparam command="load" file="$(find chomp_motion_planner)/config/chomp_pr2_right_arm.yaml" />
+	
+		<param name="animate_path" value="false"/>
+		
+		<param name="trajectory_duration" value="3.0"/>
+		<param name="trajectory_discretization" value="0.02"/>
+		<param name="learning_rate" value="100000.0" />
+		<param name="max_iterations" value="500" />
+		<param name="max_iterations_after_collision_free" value="100" />
+		<param name="smoothness_cost_weight" value="0.0005"/>
+		<param name="obstacle_cost_weight" value="1.0" />
+		<param name="joint_update_limit" value="0.01" />
+
+		<param name="smoothness_cost_velocity" value="0.01" />
+		<param name="smoothness_cost_acceleration" value="1.0" />
+		<param name="smoothness_cost_jerk" value="0.000001" />
+
+		<param name="add_randomness" value="true" />
+	</node>
+</launch>
