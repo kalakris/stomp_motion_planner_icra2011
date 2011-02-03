@@ -1,0 +1,1 @@
+This repository contains code (ROS packages) to replicate the results of the ICRA 2011 paper, "STOMP: Stochastic Trajectory Optimization for Motion Planning". For more information, please visit http://www.ros.org/wiki/Papers/ICRA2011_Kalakrishnan
