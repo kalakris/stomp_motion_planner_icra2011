@@ -226,6 +226,8 @@ private:
   void updatePositionFromMomentum();
   void calculatePseudoInverse();
 
+  void doChompOptimization();
+
   void copyPolicyToGroupTrajectory();
   void copyGroupTrajectoryToPolicy();
 

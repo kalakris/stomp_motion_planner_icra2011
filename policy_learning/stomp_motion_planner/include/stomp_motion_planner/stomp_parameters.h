@@ -74,6 +74,7 @@ public:
   double getPseudoInverseRidgeFactor() const;
   bool getAnimateEndeffector() const;
   std::string getAnimateEndeffectorSegment() const;
+  bool getUseChomp() const;
 
 private:
   double planning_time_limit_;
@@ -98,6 +99,7 @@ private:
   double pseudo_inverse_ridge_factor_;
   bool animate_endeffector_;
   std::string animate_endeffector_segment_;
+  bool use_chomp_;
 
 };
 
@@ -225,6 +227,11 @@ inline std::vector<double> StompParameters::getSmoothnessCosts() const
   ret[1] = smoothness_cost_acceleration_;
   ret[2] = smoothness_cost_jerk_;
   return ret;
+}
+
+inline bool StompParameters::getUseChomp() const
+{
+  return use_chomp_;
 }
 
 

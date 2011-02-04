@@ -205,6 +205,47 @@ StompOptimizer::~StompOptimizer()
 {
 }
 
+void StompOptimizer::doChompOptimization()
+{
+  calculateSmoothnessIncrements();
+  calculateCollisionIncrements();
+  calculateTotalIncrements();
+
+  if (!parameters_->getUseHamiltonianMonteCarlo())
+  {
+    // non-stochastic version:
+    addIncrementsToTrajectory();
+  }
+  else
+  {
+    // hamiltonian monte carlo updates:
+    getRandomMomentum();
+    updateMomentum();
+    updatePositionFromMomentum();
+    stochasticity_factor_ *= parameters_->getHmcAnnealingFactor();
+  }
+
+  handleJointLimits();
+  updateFullTrajectory();
+  last_trajectory_collision_free_ = performForwardKinematics();
+  last_trajectory_constraints_satisfied_ = true;
+
+  double cost = 0.0;
+  for (int i=free_vars_start_; i<=free_vars_end_; i++)
+  {
+    double state_collision_cost = 0.0;
+    double cumulative = 0.0;
+    for (int j=0; j<num_collision_points_; j++)
+    {
+      cumulative += collision_point_potential_[i][j] * collision_point_vel_mag_[i][j];
+      //state_collision_cost += collision_point_potential_[i][j] * collision_point_vel_mag_[i][j];
+      state_collision_cost += cumulative;
+    }
+    cost += state_collision_cost * parameters_->getObstacleCostWeight();
+  }
+  last_trajectory_cost_ = cost;
+}
+
 void StompOptimizer::optimize()
 {
   ros::WallTime start_time = ros::WallTime::now();
@@ -244,12 +285,17 @@ void StompOptimizer::optimize()
   {
     if (!ros::ok())
       break;
-    pi_loop.runSingleIteration(iteration_+1);
-    //copyPolicyToGroupTrajectory();
-    //handleJointLimits();
-    //updateFullTrajectory();
 
-    //bool collision_free = performForwardKinematics();
+    if (!parameters_->getUseChomp())
+    {
+      // after this, the latest "group trajectory" and "full trajectory" is the one optimized by pi^2
+      pi_loop.runSingleIteration(iteration_+1);
+    }
+    else
+    {
+      doChompOptimization();
+    }
+
     if (last_trajectory_collision_free_ && last_trajectory_constraints_satisfied_)
       collision_free_iteration_++;
     else
