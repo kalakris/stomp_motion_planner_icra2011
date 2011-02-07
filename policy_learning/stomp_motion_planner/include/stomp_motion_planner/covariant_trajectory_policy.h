@@ -38,9 +38,8 @@
 #define COVARIANT_TRAJECTORY_POLICY_H_
 
 #include <ros/ros.h>
-#include <policy_library/policy.h>
 
-namespace library
+namespace stomp_motion_planner
 {
 
 static const int DIFF_RULE_LENGTH = 7;
@@ -52,7 +51,7 @@ static const double DIFF_RULES[NUM_DIFF_RULES][DIFF_RULE_LENGTH] = {
     {0, 1/12.0, -17/12.0, 46/12.0, -46/12.0, 17/12.0, -1/12.0}  // jerk
 };
 
-class CovariantTrajectoryPolicy : public library::Policy
+class CovariantTrajectoryPolicy
 {
 public:
     CovariantTrajectoryPolicy();

@@ -34,9 +34,9 @@
 
 /** \author Mrinal Kalakrishnan */
 
-#include <policy_library/covariant_trajectory_policy.h>
-#include <policy_improvement_utilities/assert.h>
-#include <policy_improvement_utilities/param_server.h>
+#include <stomp_motion_planner/covariant_trajectory_policy.h>
+#include <stomp_motion_planner/assert.h>
+#include <stomp_motion_planner/param_server.h>
 #include <Eigen/LU>
 #include <Eigen/Core>
 #include <Eigen/Array>
@@ -44,7 +44,7 @@
 
 USING_PART_OF_NAMESPACE_EIGEN
 
-namespace library
+namespace stomp_motion_planner
 {
 
 CovariantTrajectoryPolicy::CovariantTrajectoryPolicy()

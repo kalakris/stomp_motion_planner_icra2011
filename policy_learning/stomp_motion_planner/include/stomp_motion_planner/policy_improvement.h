@@ -41,10 +41,10 @@
 #include <Eigen/Core>
 
 // local includes
-#include <policy_library/policy.h>
-#include <policy_improvement/multivariate_gaussian.h>
+#include <stomp_motion_planner/policy.h>
+#include <stomp_motion_planner/multivariate_gaussian.h>
 
-namespace pi2
+namespace stomp_motion_planner
 {
 
 struct Rollout
@@ -84,7 +84,7 @@ public:
      * @return true on success, false on failure
      */
     bool initialize(const int num_rollouts, const int num_time_steps, const int num_reused_rollouts,
-                    const int num_extra_rollouts, boost::shared_ptr<library::Policy> policy,
+                    const int num_extra_rollouts, boost::shared_ptr<policy_improvement::Policy> policy,
                     bool use_cumulative_costs=true);
 
     /**
@@ -143,7 +143,7 @@ private:
 
     bool use_cumulative_costs_;                                             /**< Use cumulative costs or state costs? */
 
-    boost::shared_ptr<library::Policy> policy_;
+    boost::shared_ptr<stomp_motion_planner::Policy> policy_;
 
     std::vector<Eigen::MatrixXd> control_costs_;                            /**< [num_dimensions] num_parameters x num_parameters */
     std::vector<Eigen::MatrixXd> inv_control_costs_;                        /**< [num_dimensions] num_parameters x num_parameters */

@@ -43,10 +43,10 @@
 #include <stomp_motion_planner/stomp_robot_model.h>
 #include <stomp_motion_planner/stomp_cost.h>
 #include <stomp_motion_planner/stomp_collision_space.h>
-#include <policy_improvement/multivariate_gaussian.h>
-#include <task_manager/task.h>
-#include <policy_library/covariant_trajectory_policy.h>
-#include <policy_improvement_loop/policy_improvement_loop.h>
+#include <stomp_motion_planner/multivariate_gaussian.h>
+#include <stomp_motion_planner/task.h>
+#include <stomp_motion_planner/covariant_trajectory_policy.h>
+#include <stomp_motion_planner/policy_improvement_loop.h>
 #include <motion_planning_msgs/Constraints.h>
 #include <stomp_motion_planner/constraint_evaluator.h>
 #include <stomp_motion_planner/STOMPStatistics.h>
@@ -97,14 +97,14 @@ public:
    * @param policy
    * @return
    */
-  bool getPolicy(boost::shared_ptr<library::Policy>& policy);
+  bool getPolicy(boost::shared_ptr<stomp_motion_planner::Policy>& policy);
 
   /**
    * Sets the Policy object of this Task
    * @param policy
    * @return
    */
-  bool setPolicy(const boost::shared_ptr<library::Policy> policy);
+  bool setPolicy(const boost::shared_ptr<stomp_motion_planner::Policy> policy);
 
   /**
    * Gets the weight of the control cost

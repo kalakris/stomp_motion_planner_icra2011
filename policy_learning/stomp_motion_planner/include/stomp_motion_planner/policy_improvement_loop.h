@@ -41,13 +41,13 @@
 #include <rosbag/bag.h>
 #include <boost/shared_ptr.hpp>
 
-#include <task_manager/task.h>
-#include <policy_library/policy.h>
+#include <stomp_motion_planner/policy.h>
 
-#include <policy_improvement/policy_improvement.h>
-#include <policy_improvement_loop/PolicyImprovementStatistics.h>
+#include <stomp_motion_planner/task.h>
+#include <stomp_motion_planner/policy_improvement.h>
+//#include <policy_improvement_loop/PolicyImprovementStatistics.h>
 
-namespace policy_improvement_loop
+namespace stomp_motion_planner
 {
 
 class PolicyImprovementLoop
@@ -75,11 +75,9 @@ private:
     bool use_cumulative_costs_;
 
     boost::shared_ptr<task_manager_interface::Task> task_;
-    boost::shared_ptr<library::Policy> policy_;
+    boost::shared_ptr<stomp_motion_planner::Policy> policy_;
 
-    pi2::PolicyImprovement policy_improvement_;
-
-    ros::Publisher stats_publisher_;
+    stomp_motion_planner::PolicyImprovement policy_improvement_;
 
     std::vector<std::vector<Eigen::VectorXd> > rollouts_; /**< [num_rollouts][num_dimensions] num_parameters */
     std::vector<Eigen::MatrixXd> parameter_updates_;
@@ -98,7 +96,7 @@ private:
     bool readPolicy(const int iteration_number);
     bool writePolicy(const int iteration_number, bool is_rollout = false, int rollout_id = 0);
 
-    bool writePolicyImprovementStatistics(const policy_improvement_loop::PolicyImprovementStatistics& stats_msg);
+    //bool writePolicyImprovementStatistics(const policy_improvement_loop::PolicyImprovementStatistics& stats_msg);
 
 };
 

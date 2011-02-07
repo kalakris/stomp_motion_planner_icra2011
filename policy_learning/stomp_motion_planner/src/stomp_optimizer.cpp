@@ -1159,13 +1159,13 @@ bool StompOptimizer::execute(std::vector<Eigen::VectorXd>& parameters, Eigen::Ve
   return true;
 }
 
-bool StompOptimizer::getPolicy(boost::shared_ptr<library::Policy>& policy)
+bool StompOptimizer::getPolicy(boost::shared_ptr<stomp_motion_planner::Policy>& policy)
 {
   policy = policy_;
   return true;
 }
 
-bool StompOptimizer::setPolicy(const boost::shared_ptr<library::Policy> policy)
+bool StompOptimizer::setPolicy(const boost::shared_ptr<stomp_motion_planner::Policy> policy)
 {
   return true;
 }

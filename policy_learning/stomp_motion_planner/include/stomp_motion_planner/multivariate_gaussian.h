@@ -45,7 +45,7 @@
 #include <boost/shared_ptr.hpp>
 #include <cstdlib>
 
-namespace pi2
+namespace stomp_motion_planner
 {
 
 /**

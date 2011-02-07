@@ -39,9 +39,9 @@
 
 // ros includes
 #include <ros/package.h>
-#include <policy_improvement_loop/policy_improvement_loop.h>
-#include <policy_improvement_utilities/assert.h>
-#include <policy_improvement_utilities/param_server.h>
+#include <stomp_motion_planner/policy_improvement_loop.h>
+#include <stomp_motion_planner/assert.h>
+#include <stomp_motion_planner/param_server.h>
 
 #include <task_manager/task_manager.h>
 #include <boost/filesystem.hpp>
@@ -79,7 +79,7 @@ bool PolicyImprovementLoop::initializeAndRunTaskByName(ros::NodeHandle& node_han
     // first_trial defaults to 1:
     node_handle.param("first_trial", first_trial, 1);
     //ROS_ASSERT_FUNC(policy_improvement_utilities::read(node_handle, std::string("first_trial"), first_trial));
-    ROS_ASSERT_FUNC(policy_improvement_utilities::read(node_handle, std::string("last_trial"), last_trial));
+    ROS_ASSERT_FUNC(stomp_motion_planner::read(node_handle, std::string("last_trial"), last_trial));
 
     for (int i=first_trial; i<=last_trial; ++i)
     {
@@ -89,7 +89,7 @@ bool PolicyImprovementLoop::initializeAndRunTaskByName(ros::NodeHandle& node_han
     return true;
 }
 
-bool PolicyImprovementLoop::initialize(ros::NodeHandle& node_handle, boost::shared_ptr<task_manager_interface::Task> task)
+bool PolicyImprovementLoop::initialize(ros::NodeHandle& node_handle, boost::shared_ptr<stomp_motion_planner::Task> task)
 {
     node_handle_ = node_handle;
     ROS_ASSERT_FUNC(readParameters());
@@ -108,9 +108,6 @@ bool PolicyImprovementLoop::initialize(ros::NodeHandle& node_handle, boost::shar
 
     tmp_rollout_cost_ = Eigen::VectorXd::Zero(num_time_steps_);
     rollout_costs_ = Eigen::MatrixXd::Zero(num_rollouts_, num_time_steps_);
-
-    // create the statistics publisher
-    stats_publisher_ = node_handle_.advertise<policy_improvement_loop::PolicyImprovementStatistics>(PI_STATISTICS_TOPIC_NAME, 100);
 
     policy_iteration_counter_ = 0;
     return (initialized_ = true);
@@ -219,9 +216,6 @@ bool PolicyImprovementLoop::runSingleIteration(const int iteration_number)
         ROS_ASSERT_FUNC(readPolicy(iteration_number));
     }
 
-    policy_improvement_loop::PolicyImprovementStatistics stats_msg;
-    stats_msg.rollout_costs.resize(num_rollouts_);
-
     // compute appropriate noise values
     std::vector<double> noise;
     noise.resize(num_dimensions_);
@@ -249,12 +243,6 @@ bool PolicyImprovementLoop::runSingleIteration(const int iteration_number)
     std::vector<double> all_costs;
     ROS_ASSERT_FUNC(policy_improvement_.setRolloutCosts(rollout_costs_, control_cost_weight_, all_costs));
 
-    // fill in rollout costs for publishing:
-    for (int r=0; r<num_rollouts_; ++r)
-    {
-        stats_msg.rollout_costs[r] = all_costs[r];
-    }
-
     // improve the policy
     ROS_ASSERT_FUNC(policy_improvement_.improvePolicy(parameter_updates_));
     ROS_ASSERT_FUNC(policy_->updateParameters(parameter_updates_));
@@ -262,9 +250,7 @@ bool PolicyImprovementLoop::runSingleIteration(const int iteration_number)
     // get a noise-less rollout to check the cost
     ROS_ASSERT_FUNC(policy_->getParameters(parameters_));
     ROS_ASSERT_FUNC(task_->execute(parameters_, tmp_rollout_cost_, iteration_number));
-    stats_msg.noiseless_cost = tmp_rollout_cost_.sum();
     ROS_INFO("Noiseless cost = %lf", stats_msg.noiseless_cost);
-    stats_msg.iteration = iteration_number;
 
     // add the noiseless rollout into policy_improvement:
     std::vector<std::vector<Eigen::VectorXd> > extra_rollout;
@@ -282,12 +268,10 @@ bool PolicyImprovementLoop::runSingleIteration(const int iteration_number)
         ROS_ASSERT_FUNC(writePolicyImprovementStatistics(stats_msg));
     }
 
-    ROS_INFO_STREAM(stats_msg);
-    stats_publisher_.publish(stats_msg);
-
     return true;
 }
 
+/*
 bool PolicyImprovementLoop::writePolicyImprovementStatistics(const policy_improvement_loop::PolicyImprovementStatistics& stats_msg)
 {
 
@@ -327,5 +311,5 @@ bool PolicyImprovementLoop::writePolicyImprovementStatistics(const policy_improv
     }
     return true;
 }
-
+*/
 }

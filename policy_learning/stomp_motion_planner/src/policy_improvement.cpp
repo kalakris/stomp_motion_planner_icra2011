@@ -43,8 +43,8 @@
 
 // local includes
 #include <ros/ros.h>
-#include <policy_improvement/policy_improvement.h>
-#include <policy_improvement_utilities/assert.h>
+#include <stomp_motion_planner/policy_improvement.h>
+#include <stomp_motion_planner/assert.h>
 #include <algorithm>
 
 USING_PART_OF_NAMESPACE_EIGEN

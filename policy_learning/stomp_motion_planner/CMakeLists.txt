@@ -36,6 +36,10 @@ add_definitions(-DEIGEN_NO_DEBUG)
 add_definitions(-DNDEBUG)
 
 rosbuild_add_library(stomp_motion_planner_lib
+	src/constraint_evaluator.cpp
+	src/covariant_trajectory_policy.cpp
+	src/policy_improvement_loop.cpp
+	src/policy_improvement.cpp
 	src/stomp_collision_point.cpp
 	src/stomp_collision_space.cpp
 	src/stomp_cost.cpp
@@ -44,7 +48,6 @@ rosbuild_add_library(stomp_motion_planner_lib
 	src/stomp_planner_node.cpp
 	src/stomp_robot_model.cpp
 	src/stomp_trajectory.cpp
-	src/constraint_evaluator.cpp
 	src/treefksolverjointposaxis.cpp
 	src/treefksolverjointposaxis_partial.cpp
 )	
