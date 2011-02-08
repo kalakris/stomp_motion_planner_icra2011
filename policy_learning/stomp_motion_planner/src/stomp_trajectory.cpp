@@ -34,7 +34,7 @@
 
 /** \author Mrinal Kalakrishnan */
 
-#incluhde <stomp_motion_planner/stomp_trajectory.h>
+#include <stomp_motion_planner/stomp_trajectory.h>
 #include <iostream>
 
 using namespace std;

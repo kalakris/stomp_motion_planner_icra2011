@@ -42,14 +42,9 @@
 #include <stomp_motion_planner/policy_improvement_loop.h>
 #include <stomp_motion_planner/assert.h>
 #include <stomp_motion_planner/param_server.h>
-
-#include <task_manager/task_manager.h>
 #include <boost/filesystem.hpp>
 
-using namespace task_manager;
-using namespace task_manager_interface;
-
-namespace policy_improvement_loop
+namespace stomp_motion_planner
 {
 
 const std::string PI_STATISTICS_TOPIC_NAME = std::string("policy_improvement_statistics");
@@ -63,6 +58,7 @@ PolicyImprovementLoop::~PolicyImprovementLoop()
 {
 }
 
+/*
 bool PolicyImprovementLoop::initializeAndRunTaskByName(ros::NodeHandle& node_handle, std::string& task_name)
 {
     // load the task
@@ -78,7 +74,7 @@ bool PolicyImprovementLoop::initializeAndRunTaskByName(ros::NodeHandle& node_han
 
     // first_trial defaults to 1:
     node_handle.param("first_trial", first_trial, 1);
-    //ROS_ASSERT_FUNC(policy_improvement_utilities::read(node_handle, std::string("first_trial"), first_trial));
+    //ROS_ASSERT_FUNC(stomp_motion_planner::read(node_handle, std::string("first_trial"), first_trial));
     ROS_ASSERT_FUNC(stomp_motion_planner::read(node_handle, std::string("last_trial"), last_trial));
 
     for (int i=first_trial; i<=last_trial; ++i)
@@ -87,7 +83,7 @@ bool PolicyImprovementLoop::initializeAndRunTaskByName(ros::NodeHandle& node_han
         ros::spinOnce();
     }
     return true;
-}
+}*/
 
 bool PolicyImprovementLoop::initialize(ros::NodeHandle& node_handle, boost::shared_ptr<stomp_motion_planner::Task> task)
 {
@@ -115,12 +111,12 @@ bool PolicyImprovementLoop::initialize(ros::NodeHandle& node_handle, boost::shar
 
 bool PolicyImprovementLoop::readParameters()
 {
-    ROS_ASSERT_FUNC(policy_improvement_utilities::read(node_handle_, std::string("num_rollouts"), num_rollouts_));
-    ROS_ASSERT_FUNC(policy_improvement_utilities::read(node_handle_, std::string("num_reused_rollouts"), num_reused_rollouts_));
-    ROS_ASSERT_FUNC(policy_improvement_utilities::read(node_handle_, std::string("num_time_steps"), num_time_steps_));
+    ROS_ASSERT_FUNC(stomp_motion_planner::read(node_handle_, std::string("num_rollouts"), num_rollouts_));
+    ROS_ASSERT_FUNC(stomp_motion_planner::read(node_handle_, std::string("num_reused_rollouts"), num_reused_rollouts_));
+    ROS_ASSERT_FUNC(stomp_motion_planner::read(node_handle_, std::string("num_time_steps"), num_time_steps_));
 
-    ROS_ASSERT_FUNC(policy_improvement_utilities::readDoubleArray(node_handle_, "noise_stddev", noise_stddev_));
-    ROS_ASSERT_FUNC(policy_improvement_utilities::readDoubleArray(node_handle_, "noise_decay", noise_decay_));
+    ROS_ASSERT_FUNC(stomp_motion_planner::readDoubleArray(node_handle_, "noise_stddev", noise_stddev_));
+    ROS_ASSERT_FUNC(stomp_motion_planner::readDoubleArray(node_handle_, "noise_decay", noise_decay_));
     node_handle_.param("write_to_file", write_to_file_, true); // defaults are sometimes good!
     node_handle_.param("use_cumulative_costs", use_cumulative_costs_, true);
     return true;
@@ -133,75 +129,14 @@ bool PolicyImprovementLoop::readPolicy(const int iteration_number)
     {
         return true;
     }
-    ROS_INFO("Read policy from file %s.", policy_->getFileName(iteration_number).c_str());
+/*    ROS_INFO("Read policy from file %s.", policy_->getFileName(iteration_number).c_str());
     ROS_ASSERT_FUNC(policy_->readFromDisc(policy_->getFileName(iteration_number)));
     ROS_ASSERT_FUNC(task_->setPolicy(policy_));
-    return true;
+*/    return true;
 }
 
 bool PolicyImprovementLoop::writePolicy(const int iteration_number, bool is_rollout, int rollout_id)
 {
-    std::string file_name = policy_->getFileName(iteration_number);
-    if (file_name.length() == 0)
-    {
-        return true;
-    }
-
-    if(is_rollout)
-    {
-        size_t separater_pos = file_name.find_last_of("/");
-        ROS_ASSERT_FUNC(separater_pos!=std::string::npos);
-        std::string directory_name = file_name.substr(0, separater_pos);
-        if (!boost::filesystem::exists(directory_name))
-        {
-            ROS_INFO("Creating directory %s...", directory_name.c_str());
-            ROS_ASSERT_FUNC(boost::filesystem::create_directories(directory_name));
-        }
-
-        separater_pos = file_name.find_last_of(".bag");
-        // ROS_INFO("file_name: %s", file_name.c_str());
-
-        if(separater_pos!=std::string::npos)
-        {
-            std::string rollout_file_name = file_name.substr(0, separater_pos-3);
-            rollout_file_name.append(std::string("_rollout_") + policy_improvement_utilities::getString(rollout_id) + std::string(".bag"));
-            // ROS_INFO("Write policy to file %s.", rollout_file_name.c_str());
-            ROS_ASSERT_FUNC(policy_->writeToDisc(rollout_file_name));
-            return true;
-        }
-        else
-        {
-            // we are dealing with a mixed policy
-            std::string rollout_file_name = file_name;
-            rollout_file_name.append(std::string("_rollout_") + policy_improvement_utilities::getString(rollout_id) + std::string(".bag"));
-            // ROS_INFO("Write policy to (rollout) file %s.", rollout_file_name.c_str());
-
-            // ROS_INFO("Write policy in directory %s.", directory_name.c_str());
-            ROS_ASSERT_FUNC(policy_->writeToDisc(rollout_file_name));
-            return true;
-        }
-    }
-
-    // TODO: this hack needs to go away after LibraryItem and DMPs like each other
-    size_t separater_pos = file_name.find_last_of("/");
-    std::string directory_name;
-    if(separater_pos!=std::string::npos)
-    {
-        directory_name = file_name.substr(0, separater_pos);
-    }
-    else
-    {
-        directory_name = file_name;
-    }
-    if (!boost::filesystem::exists(directory_name))
-    {
-        ROS_INFO("Creating directory %s...", directory_name.c_str());
-        ROS_ASSERT_FUNC(boost::filesystem::create_directories(directory_name));
-    }
-
-    // ROS_INFO("Write policy to file %s.", policy_->getFileName(iteration_number).c_str());
-    ROS_ASSERT_FUNC(policy_->writeToDisc(policy_->getFileName(iteration_number)));
-    policy_iteration_counter_ = iteration_number;
     return true;
 }
 
@@ -223,6 +158,7 @@ bool PolicyImprovementLoop::runSingleIteration(const int iteration_number)
     {
         noise[i] = noise_stddev_[i] * pow(noise_decay_[i], iteration_number-1);
     }
+
     // get rollouts and execute them
     ROS_ASSERT_FUNC(policy_improvement_.getRollouts(rollouts_, noise));
 
@@ -231,12 +167,6 @@ bool PolicyImprovementLoop::runSingleIteration(const int iteration_number)
         ROS_ASSERT_FUNC(task_->execute(rollouts_[r], tmp_rollout_cost_, iteration_number));
         rollout_costs_.row(r) = tmp_rollout_cost_.transpose();
         ROS_INFO("Rollout %d, cost = %lf", r+1, tmp_rollout_cost_.sum());
-
-        if (write_to_file_)
-        {
-            // store updated policy to disc
-            ROS_ASSERT_FUNC(writePolicy(iteration_number, true, r));
-        }
     }
 
     // TODO: fix this std::vector<>
@@ -250,7 +180,7 @@ bool PolicyImprovementLoop::runSingleIteration(const int iteration_number)
     // get a noise-less rollout to check the cost
     ROS_ASSERT_FUNC(policy_->getParameters(parameters_));
     ROS_ASSERT_FUNC(task_->execute(parameters_, tmp_rollout_cost_, iteration_number));
-    ROS_INFO("Noiseless cost = %lf", stats_msg.noiseless_cost);
+    //ROS_INFO("Noiseless cost = %lf", stats_msg.noiseless_cost);
 
     // add the noiseless rollout into policy_improvement:
     std::vector<std::vector<Eigen::VectorXd> > extra_rollout;
@@ -264,8 +194,8 @@ bool PolicyImprovementLoop::runSingleIteration(const int iteration_number)
     if (write_to_file_)
     {
         // store updated policy to disc
-        ROS_ASSERT_FUNC(writePolicy(iteration_number));
-        ROS_ASSERT_FUNC(writePolicyImprovementStatistics(stats_msg));
+        //ROS_ASSERT_FUNC(writePolicy(iteration_number));
+        //ROS_ASSERT_FUNC(writePolicyImprovementStatistics(stats_msg));
     }
 
     return true;

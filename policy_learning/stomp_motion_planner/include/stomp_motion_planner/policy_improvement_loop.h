@@ -56,9 +56,9 @@ public:
     PolicyImprovementLoop();
     virtual ~PolicyImprovementLoop();
 
-    bool initializeAndRunTaskByName(ros::NodeHandle& node_handle, std::string& task_name);
+    //bool initializeAndRunTaskByName(ros::NodeHandle& node_handle, std::string& task_name);
 
-    bool initialize(ros::NodeHandle& node_handle, boost::shared_ptr<task_manager_interface::Task> task);
+    bool initialize(ros::NodeHandle& node_handle, boost::shared_ptr<Task> task);
     bool runSingleIteration(int iteration_number);
 
 private:
@@ -74,10 +74,10 @@ private:
     bool write_to_file_;
     bool use_cumulative_costs_;
 
-    boost::shared_ptr<task_manager_interface::Task> task_;
-    boost::shared_ptr<stomp_motion_planner::Policy> policy_;
+    boost::shared_ptr<Task> task_;
+    boost::shared_ptr<Policy> policy_;
 
-    stomp_motion_planner::PolicyImprovement policy_improvement_;
+    PolicyImprovement policy_improvement_;
 
     std::vector<std::vector<Eigen::VectorXd> > rollouts_; /**< [num_rollouts][num_dimensions] num_parameters */
     std::vector<Eigen::MatrixXd> parameter_updates_;

@@ -95,7 +95,7 @@ bool CovariantTrajectoryPolicy::readParameters()
     node_handle_.param("num_dimensions", num_dimensions_, 1);
     node_handle_.param("movement_duration", movement_duration_, 1.0);
     node_handle_.param("cost_ridge_factor", cost_ridge_factor_, 0.00001);
-    ROS_ASSERT_FUNC(policy_improvement_utilities::readDoubleArray(node_handle_, "derivative_costs", derivative_costs_));
+    ROS_ASSERT_FUNC(stomp_motion_planner::readDoubleArray(node_handle_, "derivative_costs", derivative_costs_));
     return true;
 }
 

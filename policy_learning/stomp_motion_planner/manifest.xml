@@ -25,7 +25,7 @@
   <depend package="trajectory_msgs" />
   <depend package="filters" />
   <depend package="spline_smoother" />
-  <depend package="task_manager" />
+  <!--<depend package="task_manager" />-->
   <!--<depend package="policy_library" />-->
   <!--<depend package="policy_improvement_loop" />-->
   <depend package="move_arm_msgs" />

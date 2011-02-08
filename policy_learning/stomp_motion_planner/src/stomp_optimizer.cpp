@@ -174,14 +174,14 @@ void StompOptimizer::initialize()
   stochasticity_factor_ = 1.0;
   for (int i=0; i<num_joints_; i++)
   {
-    multivariate_gaussian_.push_back(pi2::MultivariateGaussian(Eigen::VectorXd::Zero(num_vars_free_), joint_costs_[i].getQuadraticCostInverse()));
+    multivariate_gaussian_.push_back(MultivariateGaussian(Eigen::VectorXd::Zero(num_vars_free_), joint_costs_[i].getQuadraticCostInverse()));
   }
 
   // animation init:
   animate_endeffector_segment_number_ = robot_model_->getForwardKinematicsSolver()->segmentNameToIndex(parameters_->getAnimateEndeffectorSegment());
 
   // initialize the policy
-  policy_.reset(new library::CovariantTrajectoryPolicy());
+  policy_.reset(new CovariantTrajectoryPolicy());
 
   std::vector<double> derivative_costs = parameters_->getSmoothnessCosts();
   policy_->initialize(nh, num_vars_free_, num_joints_, group_trajectory_.getDuration(),
@@ -259,7 +259,7 @@ void StompOptimizer::optimize()
 
   // initialize pi_loop
   ros::NodeHandle nh("~");
-  policy_improvement_loop::PolicyImprovementLoop pi_loop;
+  PolicyImprovementLoop pi_loop;
   pi_loop.initialize(nh, this_shared_ptr_);
   
   collision_space_->lock();

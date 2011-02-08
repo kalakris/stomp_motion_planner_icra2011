@@ -84,7 +84,7 @@ public:
      * @return true on success, false on failure
      */
     bool initialize(const int num_rollouts, const int num_time_steps, const int num_reused_rollouts,
-                    const int num_extra_rollouts, boost::shared_ptr<policy_improvement::Policy> policy,
+                    const int num_extra_rollouts, boost::shared_ptr<stomp_motion_planner::Policy> policy,
                     bool use_cumulative_costs=true);
 
     /**

@@ -60,7 +60,7 @@
 namespace stomp_motion_planner
 {
 
-class StompOptimizer: public task_manager_interface::Task
+class StompOptimizer: public Task
 {
 public:
   StompOptimizer(StompTrajectory *trajectory, const StompRobotModel *robot_model,
@@ -133,7 +133,7 @@ private:
   std::vector<StompCost> joint_costs_;
   std::vector<int> group_joint_to_kdl_joint_index_;
 
-  boost::shared_ptr<library::CovariantTrajectoryPolicy> policy_;
+  boost::shared_ptr<stomp_motion_planner::CovariantTrajectoryPolicy> policy_;
   std::vector<Eigen::VectorXd> policy_parameters_;
   boost::shared_ptr<StompOptimizer> this_shared_ptr_;
 
@@ -164,7 +164,7 @@ private:
   Eigen::MatrixXd momentum_;
   Eigen::MatrixXd random_momentum_;
   Eigen::VectorXd random_joint_momentum_; //temporary variable
-  std::vector<pi2::MultivariateGaussian> multivariate_gaussian_;
+  std::vector<stomp_motion_planner::MultivariateGaussian> multivariate_gaussian_;
   double stochasticity_factor_;
 
   std::vector<int> state_is_in_collision_;      /**< Array containing a boolean about collision info for each point in the trajectory */

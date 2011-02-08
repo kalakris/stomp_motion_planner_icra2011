@@ -48,9 +48,8 @@
 #include <algorithm>
 
 USING_PART_OF_NAMESPACE_EIGEN
-using namespace library;
 
-namespace pi2
+namespace stomp_motion_planner
 {
 
 PolicyImprovement::PolicyImprovement():
@@ -259,7 +258,9 @@ bool PolicyImprovement::getRollouts(std::vector<std::vector<Eigen::VectorXd> >& 
         rollouts.push_back(rollouts_[r].parameters_);
     }
 
+    ros::WallTime start_time = ros::WallTime::now();
     computeProjectedNoise();
+    ROS_INFO("Noise projection took %f seconds", (ros::WallTime::now() - start_time).toSec());
 
     return true;
 }
@@ -392,9 +393,15 @@ bool PolicyImprovement::improvePolicy(std::vector<Eigen::MatrixXd>& parameter_up
 {
     ROS_ASSERT(initialized_);
 
+    ros::WallTime start_time = ros::WallTime::now();
     computeRolloutCumulativeCosts();
+    ROS_INFO("Cumulative costs took %f seconds", (ros::WallTime::now() - start_time).toSec());
+    start_time = ros::WallTime::now();
     computeRolloutProbabilities();
+    ROS_INFO("Probabilities took %f seconds", (ros::WallTime::now() - start_time).toSec());
+    start_time = ros::WallTime::now();
     computeParameterUpdates();
+    ROS_INFO("Updates took %f seconds", (ros::WallTime::now() - start_time).toSec());
     parameter_updates = parameter_updates_;
 
     return true;
