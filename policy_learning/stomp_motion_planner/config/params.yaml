@@ -8,7 +8,7 @@ max_iterations_after_collision_free: 200
 smoothness_cost_velocity: 0.0
 smoothness_cost_acceleration: 1.0
 smoothness_cost_jerk: 0.0
-smoothness_cost_weight: 0.00000001
+smoothness_cost_weight: 0.000001
 constraint_cost_weight: 0.2
 #torque_cost_weight: 0.001
 

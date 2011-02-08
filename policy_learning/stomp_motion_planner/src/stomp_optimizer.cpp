@@ -289,9 +289,9 @@ void StompOptimizer::optimize()
     if (!parameters_->getUseChomp())
     {
       // after this, the latest "group trajectory" and "full trajectory" is the one optimized by pi^2
-      ros::WallTime start_time = ros::WallTime::now();
+      //ros::WallTime start_time = ros::WallTime::now();
       pi_loop.runSingleIteration(iteration_+1);
-      ROS_INFO("PI loop took %f seconds, ", (ros::WallTime::now() - start_time).toSec());
+      //ROS_INFO("PI loop took %f seconds, ", (ros::WallTime::now() - start_time).toSec());
     }
     else
     {
@@ -1150,12 +1150,12 @@ bool StompOptimizer::execute(std::vector<Eigen::VectorXd>& parameters, Eigen::Ve
   last_trajectory_cost_ = costs.sum();
   //last_trajectory_constraints_satisfied_ = (constraint_cost < 1e-6);
 
-  ROS_INFO("Obstacle cost = %f, constraint cost = %f, torque_cost = %f", obstacle_cost, constraint_cost, torque_cost);
+  //ROS_INFO("Obstacle cost = %f, constraint cost = %f, torque_cost = %f", obstacle_cost, constraint_cost, torque_cost);
   //animateEndeffector();
   //ros::spinOnce();
   //ros::Duration(1.0).sleep();
 
-  ROS_INFO("Rollout took %f seconds, ", (ros::WallTime::now() - start_time).toSec());
+  //ROS_INFO("Rollout took %f seconds, ", (ros::WallTime::now() - start_time).toSec());
   return true;
 }
 

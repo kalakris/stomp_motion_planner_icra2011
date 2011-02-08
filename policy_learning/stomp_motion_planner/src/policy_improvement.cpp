@@ -120,13 +120,7 @@ bool PolicyImprovement::setNumRollouts(const int num_rollouts, const int num_reu
     {
         rollout.parameters_.push_back(VectorXd::Zero(num_parameters_[d]));
         rollout.noise_.push_back(VectorXd::Zero(num_parameters_[d]));
-        std::vector<VectorXd> tmp_projected_noise;
-        for (int t=0; t<num_time_steps_; ++t)
-        {
-            tmp_projected_noise.push_back(VectorXd::Zero(num_parameters_[d]));
-        }
-        rollout.noise_projected_.push_back(tmp_projected_noise);
-        rollout.parameters_noise_projected_.push_back(tmp_projected_noise);
+        rollout.noise_projected_.push_back(VectorXd::Zero(num_parameters_[d]));
         rollout.control_costs_.push_back(VectorXd::Zero(num_time_steps_));
         rollout.total_costs_.push_back(VectorXd::Zero(num_time_steps_));
         rollout.cumulative_costs_.push_back(VectorXd::Zero(num_time_steps_));
@@ -258,9 +252,9 @@ bool PolicyImprovement::getRollouts(std::vector<std::vector<Eigen::VectorXd> >& 
         rollouts.push_back(rollouts_[r].parameters_);
     }
 
-    ros::WallTime start_time = ros::WallTime::now();
+    //ros::WallTime start_time = ros::WallTime::now();
     computeProjectedNoise();
-    ROS_INFO("Noise projection took %f seconds", (ros::WallTime::now() - start_time).toSec());
+    //ROS_INFO("Noise projection took %f seconds", (ros::WallTime::now() - start_time).toSec());
 
     return true;
 }
@@ -378,13 +372,12 @@ bool PolicyImprovement::computeParameterUpdates()
     for (int d=0; d<num_dimensions_; ++d)
     {
         parameter_updates_[d] = MatrixXd::Zero(num_time_steps_, num_parameters_[d]);
-        for (int t=0; t<num_time_steps_; ++t)
+
+        for (int r=0; r<num_rollouts_; ++r)
         {
-            for (int r=0; r<num_rollouts_; ++r)
-            {
-                parameter_updates_[d].row(t).transpose() += rollouts_[r].noise_projected_[d][t] * rollouts_[r].probabilities_[d](t);
-            }
+            parameter_updates_[d].row(0).transpose() += rollouts_[r].noise_[d].cwise() * rollouts_[r].probabilities_[d];
         }
+        parameter_updates_[d].row(0).transpose() = projection_matrix_[d]*parameter_updates_[d].row(0).transpose();
     }
     return true;
 }
@@ -393,15 +386,15 @@ bool PolicyImprovement::improvePolicy(std::vector<Eigen::MatrixXd>& parameter_up
 {
     ROS_ASSERT(initialized_);
 
-    ros::WallTime start_time = ros::WallTime::now();
+    //ros::WallTime start_time = ros::WallTime::now();
     computeRolloutCumulativeCosts();
-    ROS_INFO("Cumulative costs took %f seconds", (ros::WallTime::now() - start_time).toSec());
-    start_time = ros::WallTime::now();
+    //ROS_INFO("Cumulative costs took %f seconds", (ros::WallTime::now() - start_time).toSec());
+    //start_time = ros::WallTime::now();
     computeRolloutProbabilities();
-    ROS_INFO("Probabilities took %f seconds", (ros::WallTime::now() - start_time).toSec());
-    start_time = ros::WallTime::now();
+    //ROS_INFO("Probabilities took %f seconds", (ros::WallTime::now() - start_time).toSec());
+    //start_time = ros::WallTime::now();
     computeParameterUpdates();
-    ROS_INFO("Updates took %f seconds", (ros::WallTime::now() - start_time).toSec());
+    //ROS_INFO("Updates took %f seconds", (ros::WallTime::now() - start_time).toSec());
     parameter_updates = parameter_updates_;
 
     return true;
@@ -427,31 +420,24 @@ bool PolicyImprovement::preAllocateTempVariables()
 
 bool PolicyImprovement::preComputeProjectionMatrices()
 {
-    projection_matrices_.clear();
-    for (int d=0; d<num_dimensions_; ++d)
+  ROS_INFO("Precomputing projection matrices..");
+  projection_matrix_.resize(num_dimensions_);
+  for (int d=0; d<num_dimensions_; ++d)
+  {
+    projection_matrix_[d] = inv_control_costs_[d];
+    for (int p=0; p<num_parameters_[d]; ++p)
     {
-        std::vector<MatrixXd> projection_matrices_for_dim;
-
-        VectorXd basis_function(num_parameters_[d]);
-        VectorXd inv_r_times_g(num_parameters_[d]);
-        for (int t=0; t<num_time_steps_; ++t)
-        {
-            basis_function = basis_functions_[d].row(t).transpose();
-            inv_r_times_g = inv_control_costs_[d] * basis_function;
-            double g_transpose_r_g = basis_function.dot(inv_r_times_g);
-
-            if (g_transpose_r_g < 1e-6)
-            {
-                ROS_WARN("Denominator (g_transpose_r_g) is close to 0: %f", g_transpose_r_g);
-            }
-
-            // outer product
-            projection_matrices_for_dim.push_back((inv_r_times_g / g_transpose_r_g) * basis_function.transpose());
-        }
-        projection_matrices_.push_back(projection_matrices_for_dim);
-
+      double column_max = inv_control_costs_[d](0,p);
+      for (int p2 = 1; p2 < num_parameters_[d]; ++p2)
+      {
+        if (inv_control_costs_[d](p2,p) > column_max)
+          column_max = inv_control_costs_[d](p2,p);
+      }
+      projection_matrix_[d].col(p) *= (1.0/(num_parameters_[d]*column_max));
     }
-    return true;
+  }
+  ROS_INFO("Done precomputing projection matrices.");
+  return true;
 }
 
 bool PolicyImprovement::addExtraRollouts(std::vector<std::vector<Eigen::VectorXd> >& rollouts, std::vector<Eigen::VectorXd>& rollout_costs)
@@ -486,20 +472,18 @@ bool PolicyImprovement::computeNoise(Rollout& rollout)
 
 bool PolicyImprovement::computeProjectedNoise(Rollout& rollout)
 {
-    for (int d=0; d<num_dimensions_; ++d)
-    {
-        for (int t=0; t<num_time_steps_; ++t)
-        {
-            rollout.noise_projected_[d][t] = projection_matrices_[d][t] * rollout.noise_[d];
-            rollout.parameters_noise_projected_[d][t] = rollout.parameters_[d] + rollout.noise_projected_[d][t];
-        }
-    }
-    return true;
+  for (int d=0; d<num_dimensions_; ++d)
+  {
+    rollout.noise_projected_[d] = projection_matrix_[d] * rollout.noise_[d];
+    //rollout.parameters_noise_projected_[d] = rollout.parameters_[d] + rollout.noise_projected_[d];
+  }
+
+  return true;
 }
 
 bool PolicyImprovement::computeRolloutControlCosts(Rollout& rollout)
 {
-    policy_->computeControlCosts(control_costs_, rollout.parameters_noise_projected_,
+    policy_->computeControlCosts(control_costs_, rollout.parameters_, rollout.noise_projected_,
                                  0.5*control_cost_weight_, rollout.control_costs_);
     return true;
 }

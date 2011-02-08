@@ -51,8 +51,8 @@ struct Rollout
 {
     std::vector<Eigen::VectorXd> parameters_;                       /**< [num_dimensions] num_parameters */
     std::vector<Eigen::VectorXd> noise_;                            /**< [num_dimensions] num_parameters */
-    std::vector<std::vector<Eigen::VectorXd> > noise_projected_;    /**< [num_dimensions][num_time_steps] num_parameters */
-    std::vector<std::vector<Eigen::VectorXd> > parameters_noise_projected_;    /**< [num_dimensions][num_time_steps] num_parameters */
+    std::vector<Eigen::VectorXd> noise_projected_;    /**< [num_dimensions][num_time_steps] num_parameters */
+    std::vector<Eigen::VectorXd> parameters_noise_projected_;    /**< [num_dimensions][num_time_steps] num_parameters */
     Eigen::VectorXd state_costs_;                                   /**< num_time_steps */
     std::vector<Eigen::VectorXd> control_costs_;                    /**< [num_dimensions] num_time_steps */
     std::vector<Eigen::VectorXd> total_costs_;                      /**< [num_dimensions] num_time_steps */
@@ -147,6 +147,7 @@ private:
 
     std::vector<Eigen::MatrixXd> control_costs_;                            /**< [num_dimensions] num_parameters x num_parameters */
     std::vector<Eigen::MatrixXd> inv_control_costs_;                        /**< [num_dimensions] num_parameters x num_parameters */
+    std::vector<Eigen::MatrixXd> projection_matrix_;                        /**< [num_dimensions] num_parameters x num_parameters */
     double control_cost_weight_;
 
     std::vector<Eigen::MatrixXd> basis_functions_;                          /**< [num_dimensions] num_time_steps x num_parameters */
@@ -158,7 +159,6 @@ private:
     std::vector<Rollout> extra_rollouts_;
 
     std::vector<MultivariateGaussian> noise_generators_;                    /**< objects that generate noise for each dimension */
-    std::vector<std::vector<Eigen::MatrixXd> > projection_matrices_;        /**< noise projection_matrices[dimension][time_step] */
     std::vector<Eigen::MatrixXd> parameter_updates_;                        /**< [num_dimensions] num_time_steps x num_parameters */
 
     // temporary variables pre-allocated for efficiency:

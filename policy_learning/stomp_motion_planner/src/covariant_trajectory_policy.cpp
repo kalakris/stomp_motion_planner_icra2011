@@ -225,6 +225,36 @@ void CovariantTrajectoryPolicy::createDifferentiationMatrices()
     }
 }
 
+bool CovariantTrajectoryPolicy::computeControlCosts(const std::vector<Eigen::MatrixXd>& control_cost_matrices, const std::vector<Eigen::VectorXd>& parameters,
+                         const std::vector<Eigen::VectorXd>& noise, const double weight, std::vector<Eigen::VectorXd>& control_costs)
+{
+  // this measures the accelerations and squares them
+  for (int d=0; d<num_dimensions_; ++d)
+  {
+      VectorXd params_all = parameters_all_[d];
+      VectorXd costs_all = VectorXd::Zero(num_vars_all_);
+
+      params_all.segment(free_vars_start_index_, num_vars_free_) = parameters[d] + noise[d];
+      VectorXd acc_all = VectorXd::Zero(num_vars_all_);
+      for (int i=0; i<NUM_DIFF_RULES; ++i)
+      {
+          acc_all = differentiation_matrices_[i]*params_all;
+          costs_all += weight * derivative_costs_[i] * (acc_all.cwise()*acc_all);
+      }
+
+      control_costs[d] = costs_all.segment(free_vars_start_index_, num_vars_free_);
+      for (int i=0; i<free_vars_start_index_; ++i)
+      {
+          control_costs[d](0) += costs_all(i);
+          control_costs[d](num_vars_free_-1) += costs_all(num_vars_all_-(i+1));
+      }
+  }
+
+
+  return true;
+}
+
+
 bool CovariantTrajectoryPolicy::computeControlCosts(const std::vector<Eigen::MatrixXd>& control_cost_matrices, const std::vector<std::vector<Eigen::VectorXd> >& parameters,
                                  const double weight, std::vector<Eigen::VectorXd>& control_costs)
 {
@@ -284,11 +314,12 @@ bool CovariantTrajectoryPolicy::updateParameters(const std::vector<Eigen::Matrix
     }*/
 
     // this averages all the updates
-    double divisor = 1.0 / num_vars_free_;
+    //double divisor = 1.0 / num_vars_free_;
+    double divisor = 1.0;
     for (int d=0; d<num_dimensions_; ++d)
     {
         parameters_all_[d].segment(free_vars_start_index_, num_vars_free_).transpose() +=
-                divisor * updates[d].colwise().sum();
+                divisor * updates[d].row(0);
     }
 
     // this weights updates by number of time-steps remaining:

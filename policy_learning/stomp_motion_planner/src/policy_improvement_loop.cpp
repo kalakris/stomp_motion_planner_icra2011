@@ -166,7 +166,7 @@ bool PolicyImprovementLoop::runSingleIteration(const int iteration_number)
     {
         ROS_ASSERT_FUNC(task_->execute(rollouts_[r], tmp_rollout_cost_, iteration_number));
         rollout_costs_.row(r) = tmp_rollout_cost_.transpose();
-        ROS_INFO("Rollout %d, cost = %lf", r+1, tmp_rollout_cost_.sum());
+        //ROS_INFO("Rollout %d, cost = %lf", r+1, tmp_rollout_cost_.sum());
     }
 
     // TODO: fix this std::vector<>
