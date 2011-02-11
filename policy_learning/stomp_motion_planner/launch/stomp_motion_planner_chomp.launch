@@ -22,9 +22,9 @@
 
                 <param name="add_randomness" value="false" />
                 <param name="use_hamiltonian_monte_carlo" value="false" />
-                <param name="hmc_discretization" value="0.01" />
-                <param name="hmc_stochasticity" value="0.0" />
-                <param name="hmc_annealing_factor" value="0.99" />
+                <param name="hmc_discretization" value="0.02" />
+                <param name="hmc_stochasticity" value="0.001" />
+                <param name="hmc_annealing_factor" value="0.95" />
 
 
 	</node>

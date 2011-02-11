@@ -1,7 +1,7 @@
 clear all;
 close all;
 
-figSize = [4.5 3];
+figSize = [3 2];
 inset = 0.02;
 figPos = [inset inset figSize(1)-inset*2 figSize(2)-inset*2];
 
@@ -35,9 +35,9 @@ l_opt = plot(time, t_opt, ...);
 %        'LineWidth'     , 2, ...
 %        'Color'         , [0 0 1] ...
 %);
-leg = legend([l_normal l_opt], {'Without torque optimization', 'With torque optimization'}, 'Location', 'North');
+leg = legend([l_normal l_opt], {'No torque opt.', 'Torque opt.'}, 'Location', 'North');
 xl=xlabel('Time (sec)');
-yl=ylabel('Sum of absolute torques per joint (Nm)');
+yl=ylabel('Sum of abs. joint torques (Nm)');
 set(gca,'box','on');
 for i=[gca xl yl leg]
         set(i,'FontSize',10);

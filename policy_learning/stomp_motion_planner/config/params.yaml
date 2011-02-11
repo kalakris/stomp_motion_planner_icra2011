@@ -3,8 +3,8 @@ animate_endeffector: false
 animate_endeffector_segment: r_gripper_tool_frame
 trajectory_duration: 5.0
 trajectory_discretization: 0.05
-max_iterations: 200
-max_iterations_after_collision_free: 200
+max_iterations: 500
+max_iterations_after_collision_free: 500
 smoothness_cost_velocity: 0.0
 smoothness_cost_acceleration: 1.0
 smoothness_cost_jerk: 0.0

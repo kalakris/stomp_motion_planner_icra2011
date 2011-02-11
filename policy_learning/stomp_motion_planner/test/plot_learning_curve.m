@@ -1,7 +1,7 @@
 clear all;
 close all;
 
-figSize = [4.5 3];
+figSize = [3 2];
 inset = 0.02;
 figPos = [inset inset figSize(1)-inset*2 figSize(2)-inset*2];
 

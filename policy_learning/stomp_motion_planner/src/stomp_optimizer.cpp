@@ -782,13 +782,18 @@ void StompOptimizer::getRandomMomentum()
 
 void StompOptimizer::updateMomentum()
 {
-  //double alpha = 1.0 - parameters_->getHmcStochasticity();
   double eps = parameters_->getHmcDiscretization();
-  if (iteration_ > 0)
-    momentum_ = (momentum_ + eps*final_increments_);
-  else
-    momentum_ = random_momentum_;
-  //momentum_ = alpha * (momentum_ + eps*final_increments_) + sqrt(1.0-alpha*alpha)*random_momentum_;
+
+  //  if (iteration_ > 0)
+//    momentum_ = (momentum_ + eps*final_increments_);
+//  else
+//    momentum_ = random_momentum_;
+
+  double alpha = 1.0 - parameters_->getHmcStochasticity();
+  //if (iteration_ > 0)
+    momentum_ = alpha * (momentum_ + eps*final_increments_) + sqrt(1.0-alpha*alpha)*random_momentum_;
+  //else
+  //  momentum_ = random_momentum_;
 }
 
 void StompOptimizer::updatePositionFromMomentum()
@@ -890,7 +895,7 @@ void StompOptimizer::animateEndeffector()
 //  vis_marker_pub_.publish(msg2);
 
   ros::spinOnce();
-  //ros::WallDuration(0.01).sleep();
+  ros::WallDuration(0.01).sleep();
   //char c;
   //std::cin.get(c);
 }
