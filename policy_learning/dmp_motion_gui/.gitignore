@@ -1,5 +1,0 @@
-build
-ROS_NOBUILD
-cmake_install.cmake
-.project
-.cproject

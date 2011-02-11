@@ -1,6 +1,0 @@
-build/
-.cproject
-.project
-cmake_install.cmake
-bin/
-lib/

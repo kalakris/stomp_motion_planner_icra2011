@@ -1,8 +1,0 @@
-<launch>
-
-  <rosparam command="load" file="$(find dmp_motion_learner)/config/dmp_params.yaml" />
- 
-  <node pkg="dmp_motion_learner" name="cloud_filter_node" type="cloud_filter_node" respawn="false" output="screen">
-  </node>
-
-</launch>

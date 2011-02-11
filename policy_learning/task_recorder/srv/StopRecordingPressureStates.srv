@@ -1,9 +1,0 @@
-time crop_start_time 
-time crop_end_time
-int32 num_samples
----
-pr2_msgs/PressureState[] filtered_and_cropped_messages
-string info
-int32 return_code
-int32 SERVICE_CALL_FAILED = 0
-int32 SERVICE_CALL_SUCCESSFUL = 1

@@ -1,9 +1,0 @@
-<launch>
-  <!-- start up empty world -->
-  <include file="$(find dmp_motion_learner)/launch/empty_world_gdb.launch"/>
-
-  <!-- start pr2 robot -->
-  <include file="$(find pr2_gazebo)/pr2.launch"/>
-
-</launch>
-

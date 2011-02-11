@@ -1,5 +1,0 @@
-<launch>
-  <include file="$(find task_recorder)/launch/task_recorder.launch"/>
-  <include file="$(find dmp_motion_controller)/launch/dmp_motion_controller_loader.launch"/>
-  <include file="$(find dmp_motion_learner)/launch/dmp_motion_learner.launch"/>
-</launch>

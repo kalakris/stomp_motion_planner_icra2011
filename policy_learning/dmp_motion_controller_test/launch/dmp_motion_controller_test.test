@@ -1,9 +1,0 @@
-<launch>
-
-	<test test-name="dmp_motion_controller_test" pkg="dmp_motion_controller_test" type="dmp_controller_regression_test">				
-	  <rosparam command="load" file="$(find dmp_motion_controller_test)/launch/dmp_motion_controller_test.yaml"/>
-	  <rosparam command="load" file="$(find dmp_motion_controller_test)/launch/dmp_test_params.yaml" />
-  	  <rosparam command="load" file="$(find dmp_motion_controller_test)/launch/dmp_test_variable_names.yaml" />
-	</test>
-
-</launch>

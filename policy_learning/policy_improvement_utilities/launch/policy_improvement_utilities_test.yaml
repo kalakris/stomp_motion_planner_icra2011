@@ -1,7 +1,0 @@
-double_array_good1: [1, 2, 3, 4, 5]
-double_array_good2: [1.0, 2.0, 3.0, 4.0, 5.0]
-double_array_good3: [1.0, 2.0, 3, 4.0, 5]
-double_array_bad1: [1, foo, 2, ten]
-double_array_bad2: foo
-
-string_array: a b c 

@@ -1,9 +1,0 @@
-<launch>
-
-  <!-- start offsetter -->
-  <include file="$(find camera_offsetter)/launch/wide_stereo_offsetter.launch"/>
-
-  <!-- start color gui -->
-  <node name="colorgui" pkg="cmvision" type="colorgui" output="screen" args="image:=/wide_stereo_offset/left/image_rect_color"/>
-
-</launch>

@@ -1,6 +1,0 @@
-<library path="lib/libdmp_motion_controller">
-  <class name="dmp_motion_controller/DMPJointPositionController" type="dmp_controller::DMPJointPositionController" base_class_type="pr2_controller_interface::Controller" />
-  <class name="dmp_motion_controller/DMPIkController" type="dmp_controller::DMPIkController" base_class_type="pr2_controller_interface::Controller" />
-  <class name="dmp_motion_controller/DMPDualArmJointPositionController" type="dmp_controller::DMPDualArmJointPositionController" base_class_type="pr2_controller_interface::Controller" />
-  <class name="dmp_motion_controller/DMPDualArmIkController" type="dmp_controller::DMPDualArmIkController" base_class_type="pr2_controller_interface::Controller" />
-</library>

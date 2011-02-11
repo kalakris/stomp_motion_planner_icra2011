@@ -1,9 +1,0 @@
-float64 dt
-float64[] actual_pose
-float64[] desired_pose
-float64[] actual_twist
-float64[] desired_twist
-float64[] actual_joint_positions
-float64[] desired_joint_positions
-float64[] actual_joint_velocities
-float64[] desired_joint_velocities

@@ -1,7 +1,0 @@
-<launch> 
-	<node launch-prefix="xterm -e gdb --args" pkg="dmp_motion_generation_test" name="dmp_motion_generation_test" type="dmp_regression_test" output="screen">
-    <rosparam command="load" file="$(find dmp_motion_generation_test)/launch/dmp_motion_generation_test.yaml"/>
-    <rosparam command="load" file="$(find dmp_motion_generation_test)/launch/dmp_test_params.yaml" />
-    <rosparam command="load" file="$(find dmp_motion_generation_test)/launch/lwr_test_params.yaml" />
-	</node>
-</launch>

@@ -1,3 +1,0 @@
-* setStartTime() is not called when the DMP is setup() with only the sampling frequency, and the ExecutionStatistics message contains 0 as the start time
-
-* Add a parameter to the "execute dmp" service call, which contains the execution duration of each DMP (different from "movement_duration")

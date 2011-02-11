@@ -1,9 +1,0 @@
-.cproject
-.project
-library
-lib
-build
-bin
-Debug
-ROS_NOBUILD
-cmake_install.cmake

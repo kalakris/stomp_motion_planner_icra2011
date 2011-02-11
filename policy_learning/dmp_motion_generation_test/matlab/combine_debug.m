@@ -1,1 +1,0 @@
-combine_clmc_files({{'/u/pastor/workspace/dmp_motion_generation_test/library/dmp_test_debug/debug_run_icra2009_11_0.traj','icra'}, {'/u/pastor/workspace/dmp_motion_generation_test/library/dmp_test_debug/debug_run_nips2003_11_0.traj','nips'}},'/u/pastor/workspace/dmp_motion_generation_test/library/dmp_test_debug/debug_run_nips_and_icra.traj');
